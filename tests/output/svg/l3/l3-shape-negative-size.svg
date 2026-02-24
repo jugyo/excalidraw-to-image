@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="368" height="296" viewBox="0 0 368 296">
+<rect x="0" y="0" width="368" height="296" fill="#ffffff" />
+<rect x="44" y="24" width="180" height="120" stroke="#7c2d12" fill="#fed7aa" stroke-width="2" opacity="1" />
+<ellipse cx="154" cy="139" rx="110" ry="55" stroke="#14532d" fill="#bbf7d0" stroke-width="2" opacity="0.95" />
+<text x="24" y="244" font-family="Noto Sans JP, sans-serif" font-size="18" dominant-baseline="hanging" fill="#111827" opacity="1"><tspan x="24" dy="0">Negative width/height elements</tspan></text>
+</svg>

@@ -72,10 +72,14 @@ function arrowHead(last: Point, prev: Point, headSize: number): [Point, Point, P
 }
 
 function renderRectangle(element: NormalizedElement, transform: CoordinateTransform): string {
-  const x = transform.x(element.x);
-  const y = transform.y(element.y);
-  const width = transform.len(element.width);
-  const height = transform.len(element.height);
+  const rawX = Math.min(element.x, element.x + element.width);
+  const rawY = Math.min(element.y, element.y + element.height);
+  const rawWidth = Math.abs(element.width);
+  const rawHeight = Math.abs(element.height);
+  const x = transform.x(rawX);
+  const y = transform.y(rawY);
+  const width = transform.len(rawWidth);
+  const height = transform.len(rawHeight);
   const attrs = makeStyleAttrs(element, transform.len(1));
   const rotate = getRotationTransform(element, transform);
   return `<rect x="${x}" y="${y}" width="${width}" height="${height}" ${attrs}${rotate} />`;

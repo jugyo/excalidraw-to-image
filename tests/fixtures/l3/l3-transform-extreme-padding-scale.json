@@ -1,0 +1,67 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "test-fixture",
+  "elements": [
+    {
+      "id": "extreme-rect",
+      "type": "rectangle",
+      "x": 20,
+      "y": 20,
+      "width": 120,
+      "height": 80,
+      "angle": 0,
+      "strokeColor": "#111827",
+      "backgroundColor": "#fde68a",
+      "strokeWidth": 4,
+      "opacity": 100,
+      "isDeleted": false
+    },
+    {
+      "id": "extreme-line",
+      "type": "line",
+      "x": 30,
+      "y": 140,
+      "width": 160,
+      "height": 0,
+      "angle": 0,
+      "strokeColor": "#1d4ed8",
+      "backgroundColor": "transparent",
+      "strokeWidth": 6,
+      "opacity": 100,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          160,
+          0
+        ]
+      ],
+      "isDeleted": false
+    },
+    {
+      "id": "extreme-text",
+      "type": "text",
+      "x": 20,
+      "y": 180,
+      "width": 220,
+      "height": 28,
+      "angle": 0,
+      "strokeColor": "#1e3a8a",
+      "backgroundColor": "transparent",
+      "strokeWidth": 1,
+      "opacity": 100,
+      "text": "Run with high --padding/--scale",
+      "fontSize": 18,
+      "fontFamily": 1,
+      "lineHeight": 1.2,
+      "isDeleted": false
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}

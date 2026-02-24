@@ -1,0 +1,44 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "test-fixture",
+  "elements": [
+    {
+      "id": "empty-line",
+      "type": "line",
+      "x": 180,
+      "y": 180,
+      "width": 120,
+      "height": 40,
+      "angle": 0,
+      "strokeColor": "#111827",
+      "backgroundColor": "transparent",
+      "strokeWidth": 3,
+      "opacity": 100,
+      "points": [],
+      "isDeleted": false
+    },
+    {
+      "id": "caption",
+      "type": "text",
+      "x": 100,
+      "y": 240,
+      "width": 320,
+      "height": 28,
+      "angle": 0,
+      "strokeColor": "#374151",
+      "backgroundColor": "transparent",
+      "strokeWidth": 1,
+      "opacity": 100,
+      "text": "line with empty points should not crash",
+      "fontSize": 18,
+      "fontFamily": 1,
+      "lineHeight": 1.2,
+      "isDeleted": false
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}

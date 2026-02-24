@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="418" height="246" viewBox="0 0 418 246">
+<rect x="0" y="0" width="418" height="246" fill="#ffffff" />
+<rect x="24" y="24" width="220" height="140" stroke="#1f2937" fill="#dbeafe" stroke-width="2" opacity="1" />
+<text x="34" y="194" font-family="Noto Sans JP, sans-serif" font-size="18" dominant-baseline="hanging" fill="#111827" opacity="1"><tspan x="34" dy="0">Unsupported type should be ignored</tspan></text>
+</svg>

@@ -1,0 +1,57 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "test-fixture",
+  "elements": [
+    {
+      "id": "supported-rect",
+      "type": "rectangle",
+      "x": 100,
+      "y": 100,
+      "width": 220,
+      "height": 140,
+      "angle": 0,
+      "strokeColor": "#1f2937",
+      "backgroundColor": "#dbeafe",
+      "strokeWidth": 2,
+      "opacity": 100,
+      "isDeleted": false
+    },
+    {
+      "id": "unsupported-image",
+      "type": "image",
+      "x": 380,
+      "y": 90,
+      "width": 200,
+      "height": 140,
+      "angle": 0,
+      "strokeColor": "#111827",
+      "backgroundColor": "#fef3c7",
+      "strokeWidth": 1,
+      "opacity": 100,
+      "isDeleted": false
+    },
+    {
+      "id": "supported-text",
+      "type": "text",
+      "x": 110,
+      "y": 270,
+      "width": 360,
+      "height": 28,
+      "angle": 0,
+      "strokeColor": "#111827",
+      "backgroundColor": "transparent",
+      "strokeWidth": 1,
+      "opacity": 100,
+      "text": "Unsupported type should be ignored",
+      "fontSize": 18,
+      "fontFamily": 1,
+      "lineHeight": 1.2,
+      "isDeleted": false
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}

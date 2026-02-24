@@ -1,0 +1,53 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "test-fixture",
+  "elements": [
+    {
+      "id": "opaque-bg",
+      "type": "rectangle",
+      "x": 80,
+      "y": 90,
+      "width": 260,
+      "height": 180,
+      "angle": 0,
+      "strokeColor": "#111827",
+      "backgroundColor": "#bfdbfe",
+      "strokeWidth": 2,
+      "opacity": 100,
+      "isDeleted": false
+    },
+    {
+      "id": "semi-transparent-ellipse",
+      "type": "ellipse",
+      "x": 220,
+      "y": 150,
+      "width": 280,
+      "height": 180,
+      "angle": 0,
+      "strokeColor": "#1e40af",
+      "backgroundColor": "transparent",
+      "strokeWidth": 3,
+      "opacity": 45,
+      "isDeleted": false
+    },
+    {
+      "id": "semi-transparent-diamond",
+      "type": "diamond",
+      "x": 420,
+      "y": 80,
+      "width": 220,
+      "height": 160,
+      "angle": 0,
+      "strokeColor": "#065f46",
+      "backgroundColor": "#86efac",
+      "strokeWidth": 2,
+      "opacity": 55,
+      "isDeleted": false
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "transparent"
+  },
+  "files": {}
+}

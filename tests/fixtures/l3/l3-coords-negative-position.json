@@ -1,0 +1,67 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "test-fixture",
+  "elements": [
+    {
+      "id": "neg-rect",
+      "type": "rectangle",
+      "x": -220,
+      "y": -140,
+      "width": 180,
+      "height": 100,
+      "angle": 0,
+      "strokeColor": "#1f2937",
+      "backgroundColor": "#dbeafe",
+      "strokeWidth": 2,
+      "opacity": 100,
+      "isDeleted": false
+    },
+    {
+      "id": "neg-arrow",
+      "type": "arrow",
+      "x": -260,
+      "y": 10,
+      "width": 260,
+      "height": -40,
+      "angle": 0,
+      "strokeColor": "#1d4ed8",
+      "backgroundColor": "transparent",
+      "strokeWidth": 3,
+      "opacity": 100,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          260,
+          -40
+        ]
+      ],
+      "isDeleted": false
+    },
+    {
+      "id": "neg-text",
+      "type": "text",
+      "x": -200,
+      "y": 40,
+      "width": 200,
+      "height": 28,
+      "angle": 0,
+      "strokeColor": "#111827",
+      "backgroundColor": "transparent",
+      "strokeWidth": 1,
+      "opacity": 100,
+      "text": "Negative coordinates",
+      "fontSize": 20,
+      "fontFamily": 1,
+      "lineHeight": 1.2,
+      "isDeleted": false
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}

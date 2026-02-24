@@ -1,0 +1,43 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "test-fixture",
+  "elements": [
+    {
+      "id": "multiline-box",
+      "type": "rectangle",
+      "x": 80,
+      "y": 80,
+      "width": 520,
+      "height": 260,
+      "angle": 0,
+      "strokeColor": "#334155",
+      "backgroundColor": "#f8fafc",
+      "strokeWidth": 2,
+      "opacity": 100,
+      "isDeleted": false
+    },
+    {
+      "id": "multiline-text",
+      "type": "text",
+      "x": 110,
+      "y": 110,
+      "width": 470,
+      "height": 220,
+      "angle": 0,
+      "strokeColor": "#0f172a",
+      "backgroundColor": "transparent",
+      "strokeWidth": 1,
+      "opacity": 100,
+      "text": "Line 1: title\nLine 2: second sentence\nLine 3: value = 42\nLine 4: done",
+      "fontSize": 24,
+      "fontFamily": 1,
+      "lineHeight": 1.35,
+      "isDeleted": false
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}
