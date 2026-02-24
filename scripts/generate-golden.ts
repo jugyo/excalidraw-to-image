@@ -8,7 +8,8 @@ import type { CliOptions, RawExcalidrawScene } from "../src/lib/types";
 
 type ScriptOptions = {
   fixturesDir: string;
-  outDir: string;
+  svgOutDir: string;
+  pngOutDir: string;
   padding: number;
   scale: number;
   level?: string;
@@ -16,13 +17,14 @@ type ScriptOptions = {
 
 const USAGE = [
   "Usage:",
-  "  bun run scripts/generate-png-golden.ts [--fixtures-dir tests/fixtures] [--out-dir tests/output/png] [--padding 24] [--scale 1] [--level l1]",
+  "  bun run scripts/generate-golden.ts [--fixtures-dir tests/fixtures] [--svg-out-dir tests/output/svg] [--png-out-dir tests/output/png] [--padding 24] [--scale 1] [--level l1]",
 ].join("\n");
 
 function parseArgs(argv: string[]): ScriptOptions {
   const options: ScriptOptions = {
     fixturesDir: "tests/fixtures",
-    outDir: "tests/output/png",
+    svgOutDir: "tests/output/svg",
+    pngOutDir: "tests/output/png",
     padding: 24,
     scale: 1,
   };
@@ -33,8 +35,12 @@ function parseArgs(argv: string[]): ScriptOptions {
       options.fixturesDir = argv[++i] ?? "";
       continue;
     }
-    if (token === "--out-dir") {
-      options.outDir = argv[++i] ?? "";
+    if (token === "--svg-out-dir") {
+      options.svgOutDir = argv[++i] ?? "";
+      continue;
+    }
+    if (token === "--png-out-dir") {
+      options.pngOutDir = argv[++i] ?? "";
       continue;
     }
     if (token === "--padding") {
@@ -56,8 +62,8 @@ function parseArgs(argv: string[]): ScriptOptions {
     throw new Error(`Unknown argument: ${token}`);
   }
 
-  if (!options.fixturesDir || !options.outDir) {
-    throw new Error("--fixtures-dir and --out-dir are required");
+  if (!options.fixturesDir || !options.svgOutDir || !options.pngOutDir) {
+    throw new Error("--fixtures-dir, --svg-out-dir, and --png-out-dir are required");
   }
   if (!Number.isFinite(options.padding) || options.padding < 0) {
     throw new Error("--padding must be a number >= 0");
@@ -120,7 +126,8 @@ async function main(): Promise<void> {
   }
 
   const fixturesRoot = path.resolve(options.fixturesDir);
-  const outputRoot = path.resolve(options.outDir);
+  const svgOutputRoot = path.resolve(options.svgOutDir);
+  const pngOutputRoot = path.resolve(options.pngOutDir);
   const targetRoot = options.level ? path.join(fixturesRoot, options.level) : fixturesRoot;
 
   const fixtures = (await collectJsonFiles(targetRoot)).sort();
@@ -134,20 +141,25 @@ async function main(): Promise<void> {
 
   for (const fixturePath of fixtures) {
     const relativePath = path.relative(fixturesRoot, fixturePath);
-    const outRelative = relativePath.replace(/\.json$/i, ".png");
-    const outPath = path.join(outputRoot, outRelative);
+    const svgRelative = relativePath.replace(/\.json$/i, ".svg");
+    const pngRelative = relativePath.replace(/\.json$/i, ".png");
+    const svgOutPath = path.join(svgOutputRoot, svgRelative);
+    const pngOutPath = path.join(pngOutputRoot, pngRelative);
 
     const scene = await loadScene(fixturePath);
     const svg = buildSvg(scene, cliOptions);
     const png = svgToPng(svg);
 
-    await fs.mkdir(path.dirname(outPath), { recursive: true });
-    await fs.writeFile(outPath, png);
+    await fs.mkdir(path.dirname(svgOutPath), { recursive: true });
+    await fs.writeFile(svgOutPath, svg, "utf8");
+    await fs.mkdir(path.dirname(pngOutPath), { recursive: true });
+    await fs.writeFile(pngOutPath, png);
     generated += 1;
-    console.log(`Generated ${path.relative(process.cwd(), outPath)}`);
+    console.log(`Generated ${path.relative(process.cwd(), svgOutPath)}`);
+    console.log(`Generated ${path.relative(process.cwd(), pngOutPath)}`);
   }
 
-  console.log(`Done. Generated ${generated} PNG golden files.`);
+  console.log(`Done. Generated ${generated} fixture pairs (SVG + PNG).`);
 }
 
 void main();

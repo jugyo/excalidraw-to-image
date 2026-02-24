@@ -35,7 +35,7 @@ PoC では次を達成条件とする。
 
 ## 3. 成果物
 
-- 実行スクリプト: `scripts/excalidraw-to-svg.mjs`
+- 実行CLI: `src/cli/excalidraw-to-svg.ts`
 - ドキュメント: 本設計書
 - サンプル入出力:
   - `diagram.json` -> `output/diagram.svg`
@@ -99,7 +99,7 @@ PoC では次を達成条件とする。
 ## 7. CLI 仕様 (PoC)
 
 ```bash
-node scripts/excalidraw-to-svg.mjs \
+bun run src/cli/excalidraw-to-svg.ts \
   --in diagram.json \
   --out output/diagram.svg \
   --padding 24 \
@@ -129,7 +129,7 @@ node scripts/excalidraw-to-svg.mjs \
 
 ## 10. 実装ステップ
 
-1. `scripts/excalidraw-to-svg.mjs` 雛形作成
+1. `src/cli/excalidraw-to-svg.ts` 雛形作成
 2. bounds/座標変換ロジック移植
 3. 要素ごとのSVG生成を追加
 4. テキストのXMLエスケープ対応
