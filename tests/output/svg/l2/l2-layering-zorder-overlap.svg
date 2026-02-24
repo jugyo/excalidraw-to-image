@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="478" height="328" viewBox="0 0 478 328">
+<rect x="0" y="0" width="478" height="328" fill="#f9fafb" />
+<rect x="24" y="24" width="360" height="230" stroke="#1f2937" fill="#fecaca" stroke-width="2" opacity="1" />
+<ellipse cx="274" cy="174" rx="160" ry="100" stroke="#0c4a6e" fill="#bfdbfe" stroke-width="2" opacity="0.85" />
+<polygon points="329,124 454,214 329,304 204,214" stroke="#14532d" fill="#bbf7d0" stroke-width="3" opacity="0.95" />
+<text x="224" y="194" font-family="Noto Sans JP, sans-serif" font-size="28" dominant-baseline="hanging" fill="#111827" opacity="1"><tspan x="224" dy="0">Top layer text</tspan></text>
+</svg>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="656.6829186450951" height="389.5277229091458" viewBox="0 0 656.6829186450951 389.5277229091458">
+<rect x="0" y="0" width="656.6829186450951" height="389.5277229091458" fill="#ffffff" />
+<rect x="41.58330249197704" y="79.62177826491069" width="260" height="140" stroke="#111827" fill="#fde68a" stroke-width="2" opacity="1" transform="rotate(29.999999999999996 171.58330249197704 149.6217782649107)" />
+<ellipse cx="486.58330249197707" cy="149.6217782649107" rx="125" ry="80" stroke="#7c2d12" fill="#fed7aa" stroke-width="2" opacity="0.95" transform="rotate(-22.5 486.58330249197707 149.6217782649107)" />
+<text x="41.58330249197704" y="279.6217782649107" font-family="Noto Sans JP, sans-serif" font-size="20" dominant-baseline="hanging" fill="#1d4ed8" opacity="1" transform="rotate(14.999999999999998 221.58330249197704 299.6217782649107)"><tspan x="41.58330249197704" dy="0">Rotation test: rect / ellipse / text</tspan></text>
+</svg>

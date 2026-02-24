@@ -1,0 +1,119 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "test-fixture",
+  "elements": [
+    {
+      "id": "rect-a",
+      "type": "rectangle",
+      "x": 80,
+      "y": 80,
+      "width": 180,
+      "height": 110,
+      "angle": 0,
+      "strokeColor": "#1f2937",
+      "backgroundColor": "#dbeafe",
+      "strokeWidth": 2,
+      "opacity": 100,
+      "isDeleted": false
+    },
+    {
+      "id": "ellipse-a",
+      "type": "ellipse",
+      "x": 320,
+      "y": 80,
+      "width": 180,
+      "height": 110,
+      "angle": 0,
+      "strokeColor": "#7c2d12",
+      "backgroundColor": "#fde68a",
+      "strokeWidth": 2,
+      "opacity": 95,
+      "isDeleted": false
+    },
+    {
+      "id": "diamond-a",
+      "type": "diamond",
+      "x": 560,
+      "y": 80,
+      "width": 180,
+      "height": 110,
+      "angle": 0,
+      "strokeColor": "#14532d",
+      "backgroundColor": "#bbf7d0",
+      "strokeWidth": 2,
+      "opacity": 100,
+      "isDeleted": false
+    },
+    {
+      "id": "line-a",
+      "type": "line",
+      "x": 90,
+      "y": 290,
+      "width": 280,
+      "height": 0,
+      "angle": 0,
+      "strokeColor": "#111827",
+      "backgroundColor": "transparent",
+      "strokeWidth": 3,
+      "opacity": 100,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          280,
+          0
+        ]
+      ],
+      "isDeleted": false
+    },
+    {
+      "id": "arrow-a",
+      "type": "arrow",
+      "x": 430,
+      "y": 260,
+      "width": 300,
+      "height": 60,
+      "angle": 0,
+      "strokeColor": "#1d4ed8",
+      "backgroundColor": "transparent",
+      "strokeWidth": 3,
+      "opacity": 100,
+      "points": [
+        [
+          0,
+          50
+        ],
+        [
+          300,
+          0
+        ]
+      ],
+      "isDeleted": false
+    },
+    {
+      "id": "text-a",
+      "type": "text",
+      "x": 90,
+      "y": 350,
+      "width": 520,
+      "height": 36,
+      "angle": 0,
+      "strokeColor": "#0f172a",
+      "backgroundColor": "transparent",
+      "strokeWidth": 1,
+      "opacity": 100,
+      "text": "L2 composition: 6 basic elements",
+      "fontSize": 24,
+      "fontFamily": 1,
+      "lineHeight": 1.2,
+      "isDeleted": false
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#f8fafc"
+  },
+  "files": {}
+}

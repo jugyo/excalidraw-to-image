@@ -1,0 +1,57 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "test-fixture",
+  "elements": [
+    {
+      "id": "rot-rect",
+      "type": "rectangle",
+      "x": 120,
+      "y": 120,
+      "width": 260,
+      "height": 140,
+      "angle": 0.5235987755982988,
+      "strokeColor": "#111827",
+      "backgroundColor": "#fde68a",
+      "strokeWidth": 2,
+      "opacity": 100,
+      "isDeleted": false
+    },
+    {
+      "id": "rot-ellipse",
+      "type": "ellipse",
+      "x": 440,
+      "y": 110,
+      "width": 250,
+      "height": 160,
+      "angle": -0.39269908169872414,
+      "strokeColor": "#7c2d12",
+      "backgroundColor": "#fed7aa",
+      "strokeWidth": 2,
+      "opacity": 95,
+      "isDeleted": false
+    },
+    {
+      "id": "rot-text",
+      "type": "text",
+      "x": 120,
+      "y": 320,
+      "width": 360,
+      "height": 40,
+      "angle": 0.2617993877991494,
+      "strokeColor": "#1d4ed8",
+      "backgroundColor": "transparent",
+      "strokeWidth": 1,
+      "opacity": 100,
+      "text": "Rotation test: rect / ellipse / text",
+      "fontSize": 20,
+      "fontFamily": 1,
+      "lineHeight": 1.2,
+      "isDeleted": false
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}

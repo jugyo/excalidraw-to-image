@@ -33,13 +33,53 @@ function getElementBounds(element: NormalizedElement): Bounds {
     return computeLineBounds(element);
   }
 
+  const x1 = element.x;
+  const y1 = element.y;
   const x2 = element.x + element.width;
   const y2 = element.y + element.height;
+
+  const corners: Array<[number, number]> = [
+    [x1, y1],
+    [x2, y1],
+    [x2, y2],
+    [x1, y2],
+  ];
+
+  if (!element.angle) {
+    return {
+      minX: Math.min(x1, x2),
+      minY: Math.min(y1, y2),
+      maxX: Math.max(x1, x2),
+      maxY: Math.max(y1, y2),
+    };
+  }
+
+  const cx = element.x + element.width / 2;
+  const cy = element.y + element.height / 2;
+  const cos = Math.cos(element.angle);
+  const sin = Math.sin(element.angle);
+
+  let minX = Number.POSITIVE_INFINITY;
+  let minY = Number.POSITIVE_INFINITY;
+  let maxX = Number.NEGATIVE_INFINITY;
+  let maxY = Number.NEGATIVE_INFINITY;
+
+  for (const [x, y] of corners) {
+    const dx = x - cx;
+    const dy = y - cy;
+    const rx = cx + dx * cos - dy * sin;
+    const ry = cy + dx * sin + dy * cos;
+    minX = Math.min(minX, rx);
+    minY = Math.min(minY, ry);
+    maxX = Math.max(maxX, rx);
+    maxY = Math.max(maxY, ry);
+  }
+
   return {
-    minX: Math.min(element.x, x2),
-    minY: Math.min(element.y, y2),
-    maxX: Math.max(element.x, x2),
-    maxY: Math.max(element.y, y2),
+    minX,
+    minY,
+    maxX,
+    maxY,
   };
 }
 
