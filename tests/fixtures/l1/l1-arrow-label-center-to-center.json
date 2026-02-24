@@ -1,0 +1,97 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "test-fixture",
+  "elements": [
+    {
+      "id": "rect-left",
+      "type": "rectangle",
+      "x": 80,
+      "y": 120,
+      "width": 220,
+      "height": 140,
+      "angle": 0,
+      "strokeColor": "#1f2937",
+      "backgroundColor": "#eef2ff",
+      "strokeWidth": 2,
+      "opacity": 100,
+      "text": "User",
+      "fontSize": 20,
+      "fontFamily": 1,
+      "lineHeight": 1.2,
+      "boundElements": [
+        {
+          "id": "arrow-bound-center",
+          "type": "arrow"
+        }
+      ],
+      "isDeleted": false
+    },
+    {
+      "id": "rect-right",
+      "type": "rectangle",
+      "x": 420,
+      "y": 120,
+      "width": 240,
+      "height": 140,
+      "angle": 0,
+      "strokeColor": "#14532d",
+      "backgroundColor": "#ecfdf5",
+      "strokeWidth": 2,
+      "opacity": 100,
+      "text": "Order",
+      "fontSize": 20,
+      "fontFamily": 1,
+      "lineHeight": 1.2,
+      "boundElements": [
+        {
+          "id": "arrow-bound-center",
+          "type": "arrow"
+        }
+      ],
+      "isDeleted": false
+    },
+    {
+      "id": "arrow-bound-center",
+      "type": "arrow",
+      "x": 300,
+      "y": 190,
+      "width": 120,
+      "height": 0,
+      "angle": 0,
+      "strokeColor": "#111827",
+      "backgroundColor": "transparent",
+      "strokeWidth": 2,
+      "opacity": 100,
+      "text": "places (1..*)",
+      "fontSize": 14,
+      "fontFamily": 1,
+      "lineHeight": 1.2,
+      "startBinding": {
+        "elementId": "rect-left",
+        "focus": 0,
+        "gap": 0
+      },
+      "endBinding": {
+        "elementId": "rect-right",
+        "focus": 0,
+        "gap": 0
+      },
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          120,
+          0
+        ]
+      ],
+      "isDeleted": false
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}

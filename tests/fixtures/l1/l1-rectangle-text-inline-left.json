@@ -1,0 +1,57 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "test-fixture",
+  "elements": [
+    {
+      "id": "rect-inline-text",
+      "type": "rectangle",
+      "x": 120,
+      "y": 110,
+      "width": 320,
+      "height": 180,
+      "angle": 0,
+      "strokeColor": "#1f2937",
+      "backgroundColor": "#dbeafe",
+      "strokeWidth": 2,
+      "opacity": 100,
+      "text": "User\n----------------\n+ id: UUID\n+ email: string",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "lineHeight": 1.2,
+      "boundElements": [
+        {
+          "id": "rect-inline-text-label",
+          "type": "text"
+        }
+      ],
+      "isDeleted": false
+    },
+    {
+      "id": "rect-inline-text-label",
+      "type": "text",
+      "x": 140,
+      "y": 130,
+      "width": 280,
+      "height": 120,
+      "angle": 0,
+      "strokeColor": "#0f172a",
+      "backgroundColor": "transparent",
+      "strokeWidth": 1,
+      "opacity": 100,
+      "text": "User\n----------------\n+ id: UUID\n+ email: string",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "containerId": "rect-inline-text",
+      "originalText": "User\n----------------\n+ id: UUID\n+ email: string",
+      "lineHeight": 1.2,
+      "isDeleted": false
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}
