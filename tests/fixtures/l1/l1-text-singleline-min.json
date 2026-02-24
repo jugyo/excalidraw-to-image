@@ -1,0 +1,29 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "test-fixture",
+  "elements": [
+    {
+      "id": "text-1",
+      "type": "text",
+      "x": 110,
+      "y": 120,
+      "width": 300,
+      "height": 40,
+      "angle": 0,
+      "strokeColor": "#111827",
+      "backgroundColor": "transparent",
+      "strokeWidth": 1,
+      "opacity": 100,
+      "text": "L1 single line text",
+      "fontSize": 28,
+      "fontFamily": 1,
+      "lineHeight": 1.2,
+      "isDeleted": false
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}

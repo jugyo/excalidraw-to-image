@@ -1,0 +1,35 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "test-fixture",
+  "elements": [
+    {
+      "id": "arrow-1",
+      "type": "arrow",
+      "x": 90,
+      "y": 90,
+      "width": 280,
+      "height": 130,
+      "angle": 0,
+      "strokeColor": "#1d4ed8",
+      "backgroundColor": "transparent",
+      "strokeWidth": 3,
+      "opacity": 100,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          280,
+          130
+        ]
+      ],
+      "isDeleted": false
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}

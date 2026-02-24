@@ -1,0 +1,25 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "test-fixture",
+  "elements": [
+    {
+      "id": "diamond-1",
+      "type": "diamond",
+      "x": 130,
+      "y": 70,
+      "width": 220,
+      "height": 140,
+      "angle": 0,
+      "strokeColor": "#374151",
+      "backgroundColor": "#a7f3d0",
+      "strokeWidth": 2,
+      "opacity": 100,
+      "isDeleted": false
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}

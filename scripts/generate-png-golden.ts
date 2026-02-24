@@ -1,0 +1,153 @@
+#!/usr/bin/env bun
+
+import fs from "node:fs/promises";
+import path from "node:path";
+import { svgToPng } from "../src/lib/png";
+import { buildSvg } from "../src/lib/svg";
+import type { CliOptions, RawExcalidrawScene } from "../src/lib/types";
+
+type ScriptOptions = {
+  fixturesDir: string;
+  outDir: string;
+  padding: number;
+  scale: number;
+  level?: string;
+};
+
+const USAGE = [
+  "Usage:",
+  "  bun run scripts/generate-png-golden.ts [--fixtures-dir tests/fixtures] [--out-dir tests/output/png] [--padding 24] [--scale 1] [--level l1]",
+].join("\n");
+
+function parseArgs(argv: string[]): ScriptOptions {
+  const options: ScriptOptions = {
+    fixturesDir: "tests/fixtures",
+    outDir: "tests/output/png",
+    padding: 24,
+    scale: 1,
+  };
+
+  for (let i = 2; i < argv.length; i += 1) {
+    const token = argv[i];
+    if (token === "--fixtures-dir") {
+      options.fixturesDir = argv[++i] ?? "";
+      continue;
+    }
+    if (token === "--out-dir") {
+      options.outDir = argv[++i] ?? "";
+      continue;
+    }
+    if (token === "--padding") {
+      options.padding = Number(argv[++i]);
+      continue;
+    }
+    if (token === "--scale") {
+      options.scale = Number(argv[++i]);
+      continue;
+    }
+    if (token === "--level") {
+      options.level = argv[++i] ?? "";
+      continue;
+    }
+    if (token === "--help" || token === "-h") {
+      console.log(USAGE);
+      process.exit(0);
+    }
+    throw new Error(`Unknown argument: ${token}`);
+  }
+
+  if (!options.fixturesDir || !options.outDir) {
+    throw new Error("--fixtures-dir and --out-dir are required");
+  }
+  if (!Number.isFinite(options.padding) || options.padding < 0) {
+    throw new Error("--padding must be a number >= 0");
+  }
+  if (!Number.isFinite(options.scale) || options.scale <= 0) {
+    throw new Error("--scale must be a number > 0");
+  }
+  if (options.level && !/^[a-z0-9_-]+$/i.test(options.level)) {
+    throw new Error("--level must be an alphanumeric path segment");
+  }
+
+  return options;
+}
+
+async function collectJsonFiles(dir: string): Promise<string[]> {
+  const entries = await fs.readdir(dir, { withFileTypes: true });
+  const collected: string[] = [];
+
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      collected.push(...(await collectJsonFiles(fullPath)));
+      continue;
+    }
+    if (entry.isFile() && entry.name.endsWith(".json")) {
+      collected.push(fullPath);
+    }
+  }
+
+  return collected;
+}
+
+function toCliOptions(padding: number, scale: number): CliOptions {
+  return {
+    in: "",
+    out: "",
+    padding,
+    scale,
+  };
+}
+
+async function loadScene(filePath: string): Promise<RawExcalidrawScene> {
+  const raw = await fs.readFile(filePath, "utf8");
+  const scene = JSON.parse(raw) as RawExcalidrawScene;
+  if (!scene || !Array.isArray(scene.elements)) {
+    throw new Error(`Invalid Excalidraw JSON: 'elements' array is required (${filePath})`);
+  }
+  return scene;
+}
+
+async function main(): Promise<void> {
+  let options: ScriptOptions;
+  try {
+    options = parseArgs(process.argv);
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : String(error);
+    console.error(`Error: ${message}`);
+    console.error(USAGE);
+    process.exit(1);
+  }
+
+  const fixturesRoot = path.resolve(options.fixturesDir);
+  const outputRoot = path.resolve(options.outDir);
+  const targetRoot = options.level ? path.join(fixturesRoot, options.level) : fixturesRoot;
+
+  const fixtures = (await collectJsonFiles(targetRoot)).sort();
+  if (!fixtures.length) {
+    console.log(`No fixture files found: ${targetRoot}`);
+    return;
+  }
+
+  const cliOptions = toCliOptions(options.padding, options.scale);
+  let generated = 0;
+
+  for (const fixturePath of fixtures) {
+    const relativePath = path.relative(fixturesRoot, fixturePath);
+    const outRelative = relativePath.replace(/\.json$/i, ".png");
+    const outPath = path.join(outputRoot, outRelative);
+
+    const scene = await loadScene(fixturePath);
+    const svg = buildSvg(scene, cliOptions);
+    const png = svgToPng(svg);
+
+    await fs.mkdir(path.dirname(outPath), { recursive: true });
+    await fs.writeFile(outPath, png);
+    generated += 1;
+    console.log(`Generated ${path.relative(process.cwd(), outPath)}`);
+  }
+
+  console.log(`Done. Generated ${generated} PNG golden files.`);
+}
+
+void main();

@@ -1,0 +1,25 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "test-fixture",
+  "elements": [
+    {
+      "id": "rect-1",
+      "type": "rectangle",
+      "x": 100,
+      "y": 80,
+      "width": 220,
+      "height": 120,
+      "angle": 0,
+      "strokeColor": "#1f2937",
+      "backgroundColor": "#bfdbfe",
+      "strokeWidth": 2,
+      "opacity": 100,
+      "isDeleted": false
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}
