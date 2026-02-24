@@ -1,0 +1,65 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "test-fixture",
+  "elements": [
+    {
+      "id": "num-invalid-rect",
+      "type": "rectangle",
+      "x": "100",
+      "y": "NaN",
+      "width": "240px",
+      "height": null,
+      "angle": "invalid",
+      "strokeColor": "#1f2937",
+      "backgroundColor": "#dbeafe",
+      "strokeWidth": "thick",
+      "opacity": "semi",
+      "isDeleted": false
+    },
+    {
+      "id": "num-invalid-line",
+      "type": "line",
+      "x": {},
+      "y": [],
+      "width": "220",
+      "height": "0",
+      "strokeColor": "#1d4ed8",
+      "backgroundColor": "transparent",
+      "strokeWidth": "3",
+      "opacity": "100",
+      "points": [
+        [
+          "0",
+          "0"
+        ],
+        [
+          "abc",
+          120
+        ]
+      ],
+      "isDeleted": false
+    },
+    {
+      "id": "num-invalid-text",
+      "type": "text",
+      "x": 80,
+      "y": 260,
+      "width": 420,
+      "height": 40,
+      "strokeColor": "#111827",
+      "backgroundColor": "transparent",
+      "strokeWidth": 1,
+      "opacity": "opaque",
+      "text": "number coercion fallback case",
+      "fontSize": "24",
+      "fontFamily": "1",
+      "lineHeight": "1.2",
+      "isDeleted": false
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}

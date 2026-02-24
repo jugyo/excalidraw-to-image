@@ -1,0 +1,18 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "test-fixture",
+  "elements": [
+    {
+      "id": "broken-1",
+      "type": "rectangle",
+      "x": 100,
+      "y": 100,
+      "width": 200,
+      "height": 120
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {},
