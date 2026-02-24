@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="368" height="228" viewBox="0 0 368 228">
 <rect x="0" y="0" width="368" height="228" fill="#ffffff" />
+
 <rect x="24" y="24" width="320" height="180" stroke="#1f2937" fill="#dbeafe" stroke-width="2" opacity="1" />
 <text x="44" y="44" font-family="Noto Sans JP, sans-serif" font-size="16" dominant-baseline="hanging" fill="#0f172a" opacity="1"><tspan x="44" dy="0">User</tspan><tspan x="44" dy="19.2">----------------</tspan><tspan x="44" dy="19.2">+ id: UUID</tspan><tspan x="44" dy="19.2">+ email: string</tspan></text>
 </svg>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="738" height="388" viewBox="0 0 738 388">
+<rect x="0" y="0" width="738" height="388" fill="#ffffff" />
+
+<rect x="24" y="24" width="130" height="80" stroke="#111827" fill="#f3f4f6" stroke-width="1" opacity="1" />
+<rect x="184" y="24" width="130" height="80" stroke="#111827" fill="#f3f4f6" stroke-width="3" opacity="1" />
+<rect x="344" y="24" width="130" height="80" stroke="#111827" fill="#f3f4f6" stroke-width="7" opacity="1" />
+<ellipse cx="89" cy="174" rx="65" ry="40" stroke="#1d4ed8" fill="#dbeafe" stroke-width="1" opacity="1" />
+<ellipse cx="249" cy="174" rx="65" ry="40" stroke="#1d4ed8" fill="#dbeafe" stroke-width="3" opacity="1" />
+<ellipse cx="409" cy="174" rx="65" ry="40" stroke="#1d4ed8" fill="#dbeafe" stroke-width="7" opacity="1" />
+<polygon points="89,244 154,284 89,324 24,284" stroke="#14532d" fill="#bbf7d0" stroke-width="1" opacity="1" />
+<polygon points="249,244 314,284 249,324 184,284" stroke="#14532d" fill="#bbf7d0" stroke-width="3" opacity="1" />
+<polygon points="409,244 474,284 409,324 344,284" stroke="#14532d" fill="#bbf7d0" stroke-width="7" opacity="1" />
+<polyline points="534,54 714,54" stroke="#7c2d12" fill="none" stroke-width="1" opacity="1"  />
+<polyline points="534,94 714,94" stroke="#7c2d12" fill="none" stroke-width="3" opacity="1"  />
+<polyline points="534,144 714,144" stroke="#7c2d12" fill="none" stroke-width="7" opacity="1"  />
+<polyline points="534,234 706.9714531666756,195.5618992962943" stroke="#0f766e" fill="none" stroke-width="1" opacity="1"  />
+<polygon points="714,194 707.1449975329306,200.03066672735864 705.2360095041263,191.44022059773985" fill="#0f766e" opacity="1" />
+<polyline points="534,294 703.4571797500133,256.34284894444147" stroke="#0f766e" fill="none" stroke-width="3" opacity="1"  />
+<polygon points="714,254 703.7174962993956,263.04600009103797 700.8540142561894,250.1603308966098" fill="#0f766e" opacity="1" />
+<polyline points="534,364 689.4000860833644,329.46664753703016" stroke="#0f766e" fill="none" stroke-width="7" opacity="1"  />
+<polygon points="714,324 690.0074913652566,345.10733354575524 683.326033264442,315.0407720920895" fill="#0f766e" opacity="1" />
+</svg>

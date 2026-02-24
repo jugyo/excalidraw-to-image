@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="308" height="256" viewBox="0 0 308 256">
 <rect x="0" y="0" width="308" height="256" fill="#ffffff" />
+
 <rect x="64" y="24" width="180" height="100" stroke="#1f2937" fill="#dbeafe" stroke-width="2" opacity="1" />
-<polyline points="24,174 284,134" stroke="#1d4ed8" fill="none" stroke-width="3" opacity="1" />
+<polyline points="24,174 284,134" stroke="#1d4ed8" fill="none" stroke-width="3" opacity="1"  />
 <polygon points="284,134 273.1431170442686,142.34793941554136 271.1359622121166,129.30143300655322" fill="#1d4ed8" opacity="1" />
 <text x="84" y="204" font-family="Noto Sans JP, sans-serif" font-size="20" dominant-baseline="hanging" fill="#111827" opacity="1"><tspan x="84" dy="0">Negative coordinates</tspan></text>
 </svg>

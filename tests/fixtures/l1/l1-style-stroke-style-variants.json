@@ -1,0 +1,104 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "test-fixture",
+  "elements": [
+    {
+      "id": "stroke-solid-rect",
+      "type": "rectangle",
+      "x": 60,
+      "y": 70,
+      "width": 170,
+      "height": 100,
+      "strokeColor": "#111827",
+      "backgroundColor": "#e5e7eb",
+      "strokeWidth": 3,
+      "strokeStyle": "solid",
+      "fillStyle": "solid",
+      "opacity": 100,
+      "isDeleted": false
+    },
+    {
+      "id": "stroke-dashed-ellipse",
+      "type": "ellipse",
+      "x": 280,
+      "y": 70,
+      "width": 170,
+      "height": 100,
+      "strokeColor": "#1d4ed8",
+      "backgroundColor": "#dbeafe",
+      "strokeWidth": 3,
+      "strokeStyle": "dashed",
+      "fillStyle": "solid",
+      "opacity": 100,
+      "isDeleted": false
+    },
+    {
+      "id": "stroke-dotted-diamond",
+      "type": "diamond",
+      "x": 500,
+      "y": 70,
+      "width": 170,
+      "height": 100,
+      "strokeColor": "#14532d",
+      "backgroundColor": "#bbf7d0",
+      "strokeWidth": 3,
+      "strokeStyle": "dotted",
+      "fillStyle": "solid",
+      "opacity": 100,
+      "isDeleted": false
+    },
+    {
+      "id": "stroke-dashed-line",
+      "type": "line",
+      "x": 70,
+      "y": 250,
+      "width": 220,
+      "height": 0,
+      "strokeColor": "#7c2d12",
+      "backgroundColor": "transparent",
+      "strokeWidth": 4,
+      "strokeStyle": "dashed",
+      "opacity": 100,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          220,
+          0
+        ]
+      ],
+      "isDeleted": false
+    },
+    {
+      "id": "stroke-dotted-arrow",
+      "type": "arrow",
+      "x": 370,
+      "y": 220,
+      "width": 250,
+      "height": 60,
+      "strokeColor": "#0f766e",
+      "backgroundColor": "transparent",
+      "strokeWidth": 4,
+      "strokeStyle": "dotted",
+      "opacity": 100,
+      "points": [
+        [
+          0,
+          60
+        ],
+        [
+          250,
+          0
+        ]
+      ],
+      "isDeleted": false
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}

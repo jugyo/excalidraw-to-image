@@ -18,8 +18,11 @@ export type RawExcalidrawElement = {
   angle?: number;
   strokeColor?: string;
   backgroundColor?: string;
+  fillStyle?: string;
   strokeWidth?: number;
+  strokeStyle?: string;
   opacity?: number;
+  roundness?: unknown;
   points?: unknown;
   text?: string;
   fontSize?: number;
@@ -44,8 +47,11 @@ export type NormalizedElement = {
   angle: number;
   strokeColor: string;
   backgroundColor: string;
+  fillStyle: "solid" | "hachure" | "cross-hatch";
   strokeWidth: number;
+  strokeStyle: "solid" | "dashed" | "dotted";
   opacity: number;
+  roundness: number;
   points: Point[];
   text: string;
   fontSize: number;

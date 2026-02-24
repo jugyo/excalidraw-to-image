@@ -1,0 +1,113 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "test-fixture",
+  "elements": [
+    {
+      "id": "op100-rect",
+      "type": "rectangle",
+      "x": 60,
+      "y": 70,
+      "width": 170,
+      "height": 100,
+      "strokeColor": "#111827",
+      "backgroundColor": "#93c5fd",
+      "strokeWidth": 2,
+      "opacity": 100,
+      "isDeleted": false
+    },
+    {
+      "id": "op60-ellipse",
+      "type": "ellipse",
+      "x": 250,
+      "y": 70,
+      "width": 170,
+      "height": 100,
+      "strokeColor": "#14532d",
+      "backgroundColor": "#86efac",
+      "strokeWidth": 2,
+      "opacity": 60,
+      "isDeleted": false
+    },
+    {
+      "id": "op20-diamond",
+      "type": "diamond",
+      "x": 440,
+      "y": 70,
+      "width": 170,
+      "height": 100,
+      "strokeColor": "#7c2d12",
+      "backgroundColor": "#fdba74",
+      "strokeWidth": 2,
+      "opacity": 20,
+      "isDeleted": false
+    },
+    {
+      "id": "op100-line",
+      "type": "line",
+      "x": 70,
+      "y": 240,
+      "width": 210,
+      "height": 0,
+      "strokeColor": "#1d4ed8",
+      "backgroundColor": "transparent",
+      "strokeWidth": 4,
+      "opacity": 100,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          210,
+          0
+        ]
+      ],
+      "isDeleted": false
+    },
+    {
+      "id": "op40-arrow",
+      "type": "arrow",
+      "x": 340,
+      "y": 200,
+      "width": 220,
+      "height": 80,
+      "strokeColor": "#0f766e",
+      "backgroundColor": "transparent",
+      "strokeWidth": 4,
+      "opacity": 40,
+      "points": [
+        [
+          0,
+          80
+        ],
+        [
+          220,
+          0
+        ]
+      ],
+      "isDeleted": false
+    },
+    {
+      "id": "op30-text",
+      "type": "text",
+      "x": 70,
+      "y": 300,
+      "width": 420,
+      "height": 34,
+      "strokeColor": "#111827",
+      "backgroundColor": "transparent",
+      "strokeWidth": 1,
+      "opacity": 30,
+      "text": "Opacity variants for shape and text",
+      "fontSize": 28,
+      "fontFamily": 1,
+      "lineHeight": 1.2,
+      "isDeleted": false
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}

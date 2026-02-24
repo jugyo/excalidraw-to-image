@@ -16,6 +16,27 @@ function normalizePoints(points: unknown): Point[] {
 }
 
 function toNormalizedElement(element: RawExcalidrawElement): NormalizedElement {
+  const fillStyle =
+    element.fillStyle === "hachure" || element.fillStyle === "cross-hatch"
+      ? element.fillStyle
+      : "solid";
+  const strokeStyle =
+    element.strokeStyle === "dashed" || element.strokeStyle === "dotted"
+      ? element.strokeStyle
+      : "solid";
+
+  let roundness = 0;
+  if (typeof element.roundness === "number") {
+    roundness = Math.max(0, ensureNumber(element.roundness, 0));
+  } else if (element.roundness && typeof element.roundness === "object") {
+    const candidate = element.roundness as { value?: unknown; type?: unknown };
+    if (Number.isFinite(candidate.value)) {
+      roundness = Math.max(0, ensureNumber(candidate.value, 0));
+    } else if (ensureNumber(candidate.type, 0) > 0) {
+      roundness = 12;
+    }
+  }
+
   return {
     type: element.type as NormalizedElement["type"],
     x: ensureNumber(element.x, 0),
@@ -25,8 +46,11 @@ function toNormalizedElement(element: RawExcalidrawElement): NormalizedElement {
     angle: ensureNumber(element.angle, 0),
     strokeColor: element.strokeColor || "#000000",
     backgroundColor: element.backgroundColor || "transparent",
+    fillStyle,
     strokeWidth: ensureNumber(element.strokeWidth, 1),
+    strokeStyle,
     opacity: ensureNumber(element.opacity, 100),
+    roundness,
     points: normalizePoints(element.points),
     text: element.text ?? "",
     fontSize: ensureNumber(element.fontSize, 20),

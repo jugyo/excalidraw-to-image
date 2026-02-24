@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="608" height="298" viewBox="0 0 608 298">
 <rect x="0" y="0" width="608" height="298" fill="transparent" />
+
 <rect x="24" y="34" width="260" height="180" stroke="#111827" fill="#bfdbfe" stroke-width="2" opacity="1" />
 <ellipse cx="304" cy="184" rx="140" ry="90" stroke="#1e40af" fill="none" stroke-width="3" opacity="0.45" />
 <polygon points="474,24 584,104 474,184 364,104" stroke="#065f46" fill="#86efac" stroke-width="2" opacity="0.55" />

@@ -1,0 +1,48 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "test-fixture",
+  "elements": [
+    {
+      "id": "round-rect",
+      "type": "rectangle",
+      "x": 60,
+      "y": 70,
+      "width": 190,
+      "height": 110,
+      "strokeColor": "#1f2937",
+      "backgroundColor": "#dbeafe",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "fillStyle": "solid",
+      "roundness": {
+        "type": 3
+      },
+      "opacity": 100,
+      "isDeleted": false
+    },
+    {
+      "id": "round-diamond",
+      "type": "diamond",
+      "x": 320,
+      "y": 70,
+      "width": 190,
+      "height": 110,
+      "strokeColor": "#14532d",
+      "backgroundColor": "#bbf7d0",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "fillStyle": "solid",
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "opacity": 100,
+      "isDeleted": false
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}

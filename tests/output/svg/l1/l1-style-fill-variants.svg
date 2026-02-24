@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="618" height="428" viewBox="0 0 618 428">
+<rect x="0" y="0" width="618" height="428" fill="#ffffff" />
+<defs>
+<pattern id="fill-pattern-1" patternUnits="userSpaceOnUse" width="12" height="12">
+  <path d="M-3,3 L3,-3 M0,12 L12,0 M9,15 L15,9" stroke="#93c5fd" stroke-width="1.1" fill="none" />
+</pattern>
+<pattern id="fill-pattern-2" patternUnits="userSpaceOnUse" width="12" height="12">
+  <path d="M-3,3 L3,-3 M0,12 L12,0 M9,15 L15,9" stroke="#93c5fd" stroke-width="1.1" fill="none" />
+  <path d="M-3,9 L3,15 M0,0 L12,12 M9,-3 L15,3" stroke="#93c5fd" stroke-width="1.1" fill="none" />
+</pattern>
+<pattern id="fill-pattern-3" patternUnits="userSpaceOnUse" width="12" height="12">
+  <path d="M-3,3 L3,-3 M0,12 L12,0 M9,15 L15,9" stroke="#86efac" stroke-width="1.1" fill="none" />
+</pattern>
+<pattern id="fill-pattern-4" patternUnits="userSpaceOnUse" width="12" height="12">
+  <path d="M-3,3 L3,-3 M0,12 L12,0 M9,15 L15,9" stroke="#86efac" stroke-width="1.1" fill="none" />
+  <path d="M-3,9 L3,15 M0,0 L12,12 M9,-3 L15,3" stroke="#86efac" stroke-width="1.1" fill="none" />
+</pattern>
+<pattern id="fill-pattern-5" patternUnits="userSpaceOnUse" width="12" height="12">
+  <path d="M-3,3 L3,-3 M0,12 L12,0 M9,15 L15,9" stroke="#fdba74" stroke-width="1.1" fill="none" />
+</pattern>
+<pattern id="fill-pattern-6" patternUnits="userSpaceOnUse" width="12" height="12">
+  <path d="M-3,3 L3,-3 M0,12 L12,0 M9,15 L15,9" stroke="#fdba74" stroke-width="1.1" fill="none" />
+  <path d="M-3,9 L3,15 M0,0 L12,12 M9,-3 L15,3" stroke="#fdba74" stroke-width="1.1" fill="none" />
+</pattern>
+</defs>
+
+<rect x="24" y="24" width="170" height="100" stroke="#1f2937" fill="#93c5fd" stroke-width="2" opacity="1" />
+<rect x="224" y="24" width="170" height="100" stroke="#1f2937" fill="url(#fill-pattern-1)" stroke-width="2" opacity="1" />
+<rect x="424" y="24" width="170" height="100" stroke="#1f2937" fill="url(#fill-pattern-2)" stroke-width="2" opacity="1" />
+<ellipse cx="109" cy="214" rx="85" ry="50" stroke="#14532d" fill="#86efac" stroke-width="2" opacity="1" />
+<ellipse cx="309" cy="214" rx="85" ry="50" stroke="#14532d" fill="url(#fill-pattern-3)" stroke-width="2" opacity="1" />
+<ellipse cx="509" cy="214" rx="85" ry="50" stroke="#14532d" fill="url(#fill-pattern-4)" stroke-width="2" opacity="1" />
+<polygon points="109,304 194,354 109,404 24,354" stroke="#7c2d12" fill="#fdba74" stroke-width="2" opacity="1" />
+<polygon points="309,304 394,354 309,404 224,354" stroke="#7c2d12" fill="url(#fill-pattern-5)" stroke-width="2" opacity="1" />
+<polygon points="509,304 594,354 509,404 424,354" stroke="#7c2d12" fill="url(#fill-pattern-6)" stroke-width="2" opacity="1" />
+</svg>

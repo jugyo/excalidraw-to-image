@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="598" height="312" viewBox="0 0 598 312">
+<rect x="0" y="0" width="598" height="312" fill="#ffffff" />
+
+<rect x="24" y="24" width="170" height="100" stroke="#111827" fill="#93c5fd" stroke-width="2" opacity="1" />
+<ellipse cx="299" cy="74" rx="85" ry="50" stroke="#14532d" fill="#86efac" stroke-width="2" opacity="0.6" />
+<polygon points="489,24 574,74 489,124 404,74" stroke="#7c2d12" fill="#fdba74" stroke-width="2" opacity="0.2" />
+<polyline points="34,194 244,194" stroke="#1d4ed8" fill="none" stroke-width="4" opacity="1"  />
+<polyline points="304,234 510.4669747017665,158.92110010844854" stroke="#0f766e" fill="none" stroke-width="4" opacity="0.4"  />
+<polygon points="524,154 511.970644179348,167.73807113608552 505.95596626902204,151.19770688268903" fill="#0f766e" opacity="0.4" />
+<text x="34" y="254" font-family="Noto Sans JP, sans-serif" font-size="28" dominant-baseline="hanging" fill="#111827" opacity="0.3"><tspan x="34" dy="0">Opacity variants for shape and text</tspan></text>
+</svg>

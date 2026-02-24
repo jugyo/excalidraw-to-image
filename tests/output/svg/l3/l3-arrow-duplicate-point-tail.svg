@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="478" height="226" viewBox="0 0 478 226">
 <rect x="0" y="0" width="478" height="226" fill="#ffffff" />
-<polyline points="24,24 244,104 344,144 344,144" stroke="#b45309" fill="none" stroke-width="3" opacity="1" />
+
+<polyline points="24,24 244,104 344,144 344,144" stroke="#b45309" fill="none" stroke-width="3" opacity="1"  />
 <polygon points="344,144 330.40710124543983,145.67125804359347 335.309458173314,133.41536572390805" fill="#b45309" opacity="1" />
 <text x="24" y="174" font-family="Noto Sans JP, sans-serif" font-size="18" dominant-baseline="hanging" fill="#111827" opacity="1"><tspan x="24" dy="0">arrow with duplicated last point</tspan></text>
 </svg>

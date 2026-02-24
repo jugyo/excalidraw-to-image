@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="708" height="354" viewBox="0 0 708 354">
 <rect x="0" y="0" width="708" height="354" fill="#f8fafc" />
+
 <rect x="24" y="24" width="180" height="110" stroke="#1f2937" fill="#dbeafe" stroke-width="2" opacity="1" />
 <ellipse cx="354" cy="79" rx="90" ry="55" stroke="#7c2d12" fill="#fde68a" stroke-width="2" opacity="0.95" />
 <polygon points="594,24 684,79 594,134 504,79" stroke="#14532d" fill="#bbf7d0" stroke-width="2" opacity="1" />
-<polyline points="34,234 314,234" stroke="#111827" fill="none" stroke-width="3" opacity="1" />
-<polyline points="374,254 674,204" stroke="#1d4ed8" fill="none" stroke-width="3" opacity="1" />
+<polyline points="34,234 314,234" stroke="#111827" fill="none" stroke-width="3" opacity="1"  />
+<polyline points="374,254 674,204" stroke="#1d4ed8" fill="none" stroke-width="3" opacity="1"  />
 <polygon points="674,204 663.2483062302297,212.48298774495643 661.078239597799,199.46258795037213" fill="#1d4ed8" opacity="1" />
 <text x="34" y="294" font-family="Noto Sans JP, sans-serif" font-size="24" dominant-baseline="hanging" fill="#0f172a" opacity="1"><tspan x="34" dy="0">L2 composition: 6 basic elements</tspan></text>
 </svg>
