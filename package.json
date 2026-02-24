@@ -1,0 +1,12 @@
+{
+  "name": "excalidraw-export",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "excalidraw:svg": "bun run src/cli/excalidraw-to-svg.ts",
+    "excalidraw:png": "bun run src/cli/excalidraw-to-png.ts"
+  },
+  "dependencies": {
+    "@resvg/resvg-js": "^2.6.2"
+  }
+}
