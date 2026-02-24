@@ -15,6 +15,16 @@
       "backgroundColor": "#eef2ff",
       "strokeWidth": 2,
       "opacity": 100,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-user"
+        },
+        {
+          "type": "arrow",
+          "id": "rel-user-order"
+        }
+      ],
       "isDeleted": false
     },
     {
@@ -32,6 +42,10 @@
       "text": "User\n----------------\n+ id: UUID\n+ email: string\n+ status: UserStatus\n----------------\n+ placeOrder(): Order",
       "fontSize": 16,
       "fontFamily": 1,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "containerId": "box-user",
+      "originalText": "User\n----------------\n+ id: UUID\n+ email: string\n+ status: UserStatus\n----------------\n+ placeOrder(): Order",
       "lineHeight": 1.2,
       "isDeleted": false
     },
@@ -41,12 +55,26 @@
       "x": 430,
       "y": 90,
       "width": 320,
-      "height": 250,
+      "height": 220,
       "angle": 0,
       "strokeColor": "#14532d",
       "backgroundColor": "#ecfdf5",
       "strokeWidth": 2,
       "opacity": 100,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-order"
+        },
+        {
+          "type": "arrow",
+          "id": "rel-user-order"
+        },
+        {
+          "type": "arrow",
+          "id": "rel-order-item"
+        }
+      ],
       "isDeleted": false
     },
     {
@@ -55,7 +83,7 @@
       "x": 448,
       "y": 108,
       "width": 284,
-      "height": 214,
+      "height": 184,
       "angle": 0,
       "strokeColor": "#052e16",
       "backgroundColor": "transparent",
@@ -64,6 +92,10 @@
       "text": "Order\n----------------\n+ orderNo: string\n+ total: Money\n+ state: OrderState\n----------------\n+ addItem(product, qty): void\n+ pay(method): Receipt",
       "fontSize": 16,
       "fontFamily": 1,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "containerId": "box-order",
+      "originalText": "Order\n----------------\n+ orderNo: string\n+ total: Money\n+ state: OrderState\n----------------\n+ addItem(product, qty): void\n+ pay(method): Receipt",
       "lineHeight": 1.2,
       "isDeleted": false
     },
@@ -79,6 +111,16 @@
       "backgroundColor": "#fff7ed",
       "strokeWidth": 2,
       "opacity": 100,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-item"
+        },
+        {
+          "type": "arrow",
+          "id": "rel-order-item"
+        }
+      ],
       "isDeleted": false
     },
     {
@@ -96,6 +138,10 @@
       "text": "OrderItem\n----------------\n+ qty: int\n+ unitPrice: Money\n----------------\n+ subtotal(): Money",
       "fontSize": 16,
       "fontFamily": 1,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "containerId": "box-item",
+      "originalText": "OrderItem\n----------------\n+ qty: int\n+ unitPrice: Money\n----------------\n+ subtotal(): Money",
       "lineHeight": 1.2,
       "isDeleted": false
     },
@@ -111,6 +157,22 @@
       "backgroundColor": "transparent",
       "strokeWidth": 2,
       "opacity": 100,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "label-user-order"
+        }
+      ],
+      "startBinding": {
+        "elementId": "box-user",
+        "focus": 0,
+        "gap": 0
+      },
+      "endBinding": {
+        "elementId": "box-order",
+        "focus": 0,
+        "gap": 0
+      },
       "points": [
         [
           0,
@@ -127,17 +189,21 @@
       "id": "label-user-order",
       "type": "text",
       "x": 368,
-      "y": 168,
-      "width": 110,
+      "y": 170,
+      "width": 150,
       "height": 26,
       "angle": 0,
       "strokeColor": "#374151",
       "backgroundColor": "transparent",
       "strokeWidth": 1,
       "opacity": 100,
-      "text": "1 places *",
+      "text": "places (1..*)",
       "fontSize": 14,
       "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "rel-user-order",
+      "originalText": "places (1..*)",
       "lineHeight": 1.2,
       "isDeleted": false
     },
@@ -145,14 +211,30 @@
       "id": "rel-order-item",
       "type": "arrow",
       "x": 590,
-      "y": 340,
+      "y": 310,
       "width": 0,
-      "height": 80,
+      "height": 110,
       "angle": 0,
       "strokeColor": "#7c2d12",
       "backgroundColor": "transparent",
       "strokeWidth": 2,
       "opacity": 100,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "label-order-item"
+        }
+      ],
+      "startBinding": {
+        "elementId": "box-order",
+        "focus": 0,
+        "gap": 0
+      },
+      "endBinding": {
+        "elementId": "box-item",
+        "focus": 0,
+        "gap": 0
+      },
       "points": [
         [
           0,
@@ -160,9 +242,31 @@
         ],
         [
           0,
-          80
+          110
         ]
       ],
+      "isDeleted": false
+    },
+    {
+      "id": "label-order-item",
+      "type": "text",
+      "x": 602,
+      "y": 352,
+      "width": 170,
+      "height": 26,
+      "angle": 0,
+      "strokeColor": "#7c2d12",
+      "backgroundColor": "transparent",
+      "strokeWidth": 1,
+      "opacity": 100,
+      "text": "contains (1..*)",
+      "fontSize": 14,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "rel-order-item",
+      "originalText": "contains (1..*)",
+      "lineHeight": 1.2,
       "isDeleted": false
     },
     {
