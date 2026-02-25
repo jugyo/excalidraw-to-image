@@ -5,7 +5,8 @@
   "scripts": {
     "excalidraw:svg": "bun run src/cli/excalidraw-to-svg.ts",
     "excalidraw:png": "bun run src/cli/excalidraw-to-png.ts",
-    "golden:generate": "bun run scripts/generate-golden.ts"
+    "golden:generate": "bun run scripts/generate-golden.ts",
+    "test": "bun test"
   },
   "dependencies": {
     "@resvg/resvg-js": "^2.6.2"

@@ -85,6 +85,9 @@ async function collectJsonFiles(dir: string): Promise<string[]> {
   for (const entry of entries) {
     const fullPath = path.join(dir, entry.name);
     if (entry.isDirectory()) {
+      if (entry.name === "failure") {
+        continue;
+      }
       collected.push(...(await collectJsonFiles(fullPath)));
       continue;
     }
