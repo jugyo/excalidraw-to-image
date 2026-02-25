@@ -12,6 +12,12 @@ export type DoubleStrokePath = {
   secondaryPath: string;
 };
 
+export type VariableWidthStrokeOptions = {
+  seed: string;
+  strokeWidth: number;
+  roughness: number;
+};
+
 function clamp(value: number, min: number, max: number): number {
   return Math.min(max, Math.max(min, value));
 }
@@ -51,8 +57,12 @@ function toPath(points: Point[], closed: boolean): string {
 }
 
 export function jitterPath(points: Point[], options: JitterPathOptions): string {
+  return toPath(jitterPolyline(points, options), Boolean(options.closed));
+}
+
+export function jitterPolyline(points: Point[], options: JitterPathOptions): Point[] {
   if (points.length < 2) {
-    return "";
+    return [];
   }
 
   const closed = Boolean(options.closed);
@@ -97,7 +107,7 @@ export function jitterPath(points: Point[], options: JitterPathOptions): string 
     }
   }
 
-  return toPath(jittered, closed);
+  return jittered;
 }
 
 export function doubleStrokePath(points: Point[], options: JitterPathOptions): DoubleStrokePath {
@@ -113,6 +123,90 @@ export function doubleStrokePath(points: Point[], options: JitterPathOptions): D
 
 export function polygonPath(points: Point[]): string {
   return toPath(points, true);
+}
+
+function normalizeVector(x: number, y: number): Point {
+  const len = Math.hypot(x, y);
+  if (len < 1e-6) {
+    return [0, 0];
+  }
+  return [x / len, y / len];
+}
+
+export function variableWidthStrokeFillPath(points: Point[], options: VariableWidthStrokeOptions): string {
+  const centerline = jitterPolyline(points, {
+    seed: options.seed,
+    strokeWidth: options.strokeWidth,
+    closed: false,
+    amplitudeScale: options.roughness,
+  });
+  if (centerline.length < 2) {
+    return "";
+  }
+
+  const baseWidth = Math.max(0.8, options.strokeWidth);
+  const roughness = Math.max(0, options.roughness);
+  const variation = clamp(0.08 + roughness * 0.12, 0.06, 0.34);
+  const rand = mulberry32(hashString(`${options.seed}:width`));
+
+  const widths: number[] = [];
+  for (let i = 0; i < centerline.length; i += 1) {
+    const jitter = (rand() * 2 - 1) * variation;
+    const raw = baseWidth * (1 + jitter);
+    const prev = i > 0 ? widths[i - 1] : raw;
+    const smooth = prev * 0.7 + raw * 0.3;
+    widths.push(clamp(smooth, baseWidth * 0.65, baseWidth * 1.45));
+  }
+
+  const tangents: Point[] = [];
+  for (let i = 0; i < centerline.length; i += 1) {
+    const prev = centerline[Math.max(0, i - 1)];
+    const next = centerline[Math.min(centerline.length - 1, i + 1)];
+    const [tx, ty] = normalizeVector(next[0] - prev[0], next[1] - prev[1]);
+    if (Math.abs(tx) < 1e-6 && Math.abs(ty) < 1e-6) {
+      tangents.push(i > 0 ? tangents[i - 1] : [1, 0]);
+      continue;
+    }
+    tangents.push([tx, ty]);
+  }
+
+  const left: Point[] = [];
+  const right: Point[] = [];
+  for (let i = 0; i < centerline.length; i += 1) {
+    const [tx, ty] = tangents[i];
+    const nx = -ty;
+    const ny = tx;
+    const radius = widths[i] * 0.5;
+    left.push([centerline[i][0] + nx * radius, centerline[i][1] + ny * radius]);
+    right.push([centerline[i][0] - nx * radius, centerline[i][1] - ny * radius]);
+  }
+
+  const startCenter = centerline[0];
+  const endCenter = centerline[centerline.length - 1];
+  const startNormal = [-tangents[0][1], tangents[0][0]] as Point;
+  const endNormal = [-tangents[tangents.length - 1][1], tangents[tangents.length - 1][0]] as Point;
+  const startLeftAngle = Math.atan2(startNormal[1], startNormal[0]);
+  const startRightAngle = startLeftAngle + Math.PI;
+  const endLeftAngle = Math.atan2(endNormal[1], endNormal[0]);
+  const capSegments = 6;
+  const startCap: Point[] = [];
+  const endCap: Point[] = [];
+
+  for (let i = 1; i <= capSegments; i += 1) {
+    const t = i / capSegments;
+    const angle = startRightAngle + Math.PI * t;
+    const radius = widths[0] * 0.5;
+    startCap.push([startCenter[0] + Math.cos(angle) * radius, startCenter[1] + Math.sin(angle) * radius]);
+  }
+  for (let i = 1; i <= capSegments; i += 1) {
+    const t = i / capSegments;
+    const angle = endLeftAngle + Math.PI * t;
+    const radius = widths[widths.length - 1] * 0.5;
+    endCap.push([endCenter[0] + Math.cos(angle) * radius, endCenter[1] + Math.sin(angle) * radius]);
+  }
+
+  const outline: Point[] = [left[0], ...left.slice(1), ...endCap, right[right.length - 1], ...right.slice(0, -1).reverse(), ...startCap];
+  return polygonPath(outline);
 }
 
 export function ellipseToPolyline(

@@ -5,6 +5,7 @@ import {
   ellipseToPolyline,
   jitterPath,
   polygonPath,
+  variableWidthStrokeFillPath,
 } from "./handdrawn";
 import { computeSceneBounds } from "./bounds";
 import { normalizeElements } from "./normalize";
@@ -448,6 +449,22 @@ function renderHanddrawnStrokes(
   const attrs = [dash, dottedCap, extraAttrs].filter(Boolean).join(" ");
   if (!enableDoubleStroke) {
     const singlePath = jitterPath(points, { seed, strokeWidth, closed, amplitudeScale: roughness });
+    const layers: string[] = [
+      `<path d="${singlePath}" fill="none" stroke="${stroke}" stroke-width="${strokeWidth}" opacity="${opacity}" ${attrs} />`,
+    ];
+    if (roughness >= 0.85) {
+      const secondaryPath = jitterPath(points, {
+        seed: `${seed}:layer2`,
+        strokeWidth,
+        closed,
+        amplitudeScale: roughness * 1.1,
+      });
+      const secondaryWidth = Math.max(0.4, strokeWidth * (roughness >= 1.4 ? 0.72 : 0.9));
+      const secondaryOpacity = opacity * (roughness >= 1.4 ? 0.22 : 0.18);
+      layers.push(
+        `<path d="${secondaryPath}" fill="none" stroke="${stroke}" stroke-width="${secondaryWidth}" opacity="${secondaryOpacity}" ${attrs} />`,
+      );
+    }
     if (roughness >= 1.4) {
       const accentWeight = Math.min(0.75, 0.48 + (roughness - 1) * 0.14);
       const accentOpacity = Math.min(0.5, 0.28 + (roughness - 1) * 0.14);
@@ -457,12 +474,14 @@ function renderHanddrawnStrokes(
         closed,
         amplitudeScale: roughness * 1.05,
       });
-      return `<path d="${singlePath}" fill="none" stroke="${stroke}" stroke-width="${strokeWidth}" opacity="${opacity}" ${attrs} />\n<path d="${accentPath}" fill="none" stroke="${stroke}" stroke-width="${Math.max(
-        0.4,
-        strokeWidth * accentWeight,
-      )}" opacity="${opacity * accentOpacity}" ${attrs} />`;
+      layers.push(
+        `<path d="${accentPath}" fill="none" stroke="${stroke}" stroke-width="${Math.max(
+          0.4,
+          strokeWidth * accentWeight,
+        )}" opacity="${opacity * accentOpacity}" ${attrs} />`,
+      );
     }
-    return `<path d="${singlePath}" fill="none" stroke="${stroke}" stroke-width="${strokeWidth}" opacity="${opacity}" ${attrs} />`;
+    return layers.join("\n");
   }
   return `<path d="${paths.primaryPath}" fill="none" stroke="${stroke}" stroke-width="${strokeWidth}" opacity="${opacity}" ${attrs} />\n<path d="${paths.secondaryPath}" fill="none" stroke="${stroke}" stroke-width="${Math.max(0.4, strokeWidth * 0.9)}" opacity="${opacity * 0.7}" ${attrs} />`;
 }
@@ -602,8 +621,43 @@ function renderLineLikeHanddrawn(
   }
 
   const points = absolutePoints.map(([x, y]) => [transform.x(x), transform.y(y)] as Point);
+  const canUseVariableFill =
+    element.strokeStyle === "solid" && element.strokeWidth >= 1.8 && points.length >= 2;
+
+  const renderVariableWidthFill = (seed: string, roughness: number): string => {
+    const d = variableWidthStrokeFillPath(points, {
+      seed,
+      strokeWidth: Math.max(0.5, element.strokeWidth),
+      roughness,
+    });
+    if (!d) {
+      return "";
+    }
+    const opacity = normalizeOpacity(element.opacity);
+    const color = escapeXml(element.strokeColor);
+    if (roughness < 0.85) {
+      return `<path d="${d}" fill="${color}" opacity="${opacity}" />`;
+    }
+    const d2 = variableWidthStrokeFillPath(points, {
+      seed: `${seed}:layer2`,
+      strokeWidth: Math.max(0.5, element.strokeWidth) * (roughness >= 1.4 ? 0.92 : 0.97),
+      roughness: roughness * 1.1,
+    });
+    if (!d2) {
+      return `<path d="${d}" fill="${color}" opacity="${opacity}" />`;
+    }
+    const layer2Opacity = opacity * (roughness >= 1.4 ? 0.22 : 0.18);
+    return `<path d="${d}" fill="${color}" opacity="${opacity}" />\n<path d="${d2}" fill="${color}" opacity="${layer2Opacity}" />`;
+  };
+
   if (!withArrowHead || points.length < 2) {
     const roughness = (element.strokeWidth >= 4 ? 0.5 : 0.7) * sloppinessScale;
+    if (canUseVariableFill) {
+      const fillPath = renderVariableWidthFill(`line:${element.x}:${element.y}:${points.length}`, roughness);
+      if (fillPath) {
+        return fillPath;
+      }
+    }
     return renderHanddrawnStrokes(
       element,
       points,
@@ -630,14 +684,18 @@ function renderLineLikeHanddrawn(
   const shaftPoints = points.slice();
   const shaftRoughness = (element.strokeWidth >= 4 ? 0.2 : 0.3) * sloppinessScale;
 
-  const shaft = renderHanddrawnStrokes(
-    element,
-    shaftPoints,
-    `arrow:${element.x}:${element.y}:${points.length}`,
-    false,
-    'stroke-linejoin="round" stroke-linecap="round"',
-    { roughness: shaftRoughness, doubleStroke: false },
-  );
+  const shaftSeed = `arrow:${element.x}:${element.y}:${points.length}`;
+  const shaft =
+    canUseVariableFill
+      ? renderVariableWidthFill(shaftSeed, shaftRoughness)
+      : renderHanddrawnStrokes(
+          element,
+          shaftPoints,
+          shaftSeed,
+          false,
+          'stroke-linejoin="round" stroke-linecap="round"',
+          { roughness: shaftRoughness, doubleStroke: false },
+        );
   const head = arrowHead(tip, prev, headSize);
   const stroke = escapeXml(element.strokeColor);
   const opacity = normalizeOpacity(element.opacity);
