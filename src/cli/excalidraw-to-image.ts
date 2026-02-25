@@ -5,7 +5,7 @@ import { CLI_USAGE } from "../lib/constants";
 import {
   loadSceneOrExit,
   parseArgsOrExit,
-  printLicensesOrExit,
+  printLicenses,
   writeOutputOrExit,
 } from "../lib/cli";
 import { svgToPng } from "../lib/png";
@@ -13,7 +13,17 @@ import { buildSvg } from "../lib/svg";
 
 async function main(): Promise<void> {
   const args = parseArgsOrExit(process.argv, CLI_USAGE);
-  await printLicensesOrExit(args.printLicenses);
+  if (args.printLicenses) {
+    try {
+      await printLicenses();
+      return;
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : String(error);
+      console.error(`Error: ${message}`);
+      process.exit(1);
+    }
+  }
+
   const scene = await loadSceneOrExit(args.in);
   const svg = buildSvg(scene, args);
   const extension = path.extname(args.out).toLowerCase();

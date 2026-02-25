@@ -19,20 +19,14 @@ export function parseArgsOrExit(argv: string[], usage: string): CliOptions {
   }
 }
 
-export async function printLicensesOrExit(printLicenses: boolean): Promise<void> {
-  if (!printLicenses) {
-    return;
-  }
-
+export async function printLicenses(): Promise<void> {
   const licensesPath = path.resolve(import.meta.dir, THIRD_PARTY_LICENSES_RELATIVE_PATH);
   try {
     const content = await fs.readFile(licensesPath, "utf8");
     console.log(content.trimEnd());
-    process.exit(0);
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : String(error);
-    console.error(`Error: failed to read third-party licenses: ${message}`);
-    process.exit(1);
+    throw new Error(`failed to read third-party licenses: ${message}`);
   }
 }
 
