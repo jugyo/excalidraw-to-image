@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 import { FONT_FAMILY_MAP } from "./constants";
 import {
   buildPolygonHatchPath,
@@ -9,6 +11,7 @@ import {
 } from "./handdrawn";
 import { computeSceneBounds } from "./bounds";
 import { normalizeElements } from "./normalize";
+import { VIRGIL_TTF_FILE_RELATIVE_PATH } from "./constants";
 import type {
   Bounds,
   CliOptions,
@@ -22,6 +25,25 @@ import type {
   RawExcalidrawScene,
 } from "./types";
 import { escapeXml, normalizeOpacity, pointToAbs, pointsToSvg } from "./utils";
+
+let embeddedVirgilCssCache: string | null = null;
+
+function getEmbeddedVirgilCss(): string {
+  if (embeddedVirgilCssCache !== null) {
+    return embeddedVirgilCssCache;
+  }
+
+  try {
+    const fontPath = path.resolve(import.meta.dir, VIRGIL_TTF_FILE_RELATIVE_PATH);
+    const base64 = fs.readFileSync(fontPath).toString("base64");
+    embeddedVirgilCssCache =
+      `@font-face { font-family: 'Virgil'; src: url('data:font/ttf;base64,${base64}') format('truetype'); font-weight: normal; font-style: normal; }`;
+  } catch {
+    embeddedVirgilCssCache = "";
+  }
+
+  return embeddedVirgilCssCache;
+}
 
 function createTransform(bounds: Bounds, padding: number, scale: number): CoordinateTransform {
   return {
@@ -875,6 +897,7 @@ function renderElementsHanddrawn(
 export function buildSvg(scene: RawExcalidrawScene, options: CliOptions): string {
   const elements = normalizeElements(scene.elements ?? [], scene.files ?? {});
   const elementsById = new Map(elements.map((element) => [element.id, element]));
+  const hasText = elements.some((element) => element.type === "text");
   const hasImageElements = elements.some((element) => element.type === "image");
   const imageClips: ImageClipCatalog = { defs: [], nextId: 1 };
   const fillPatterns = { defs: "", ids: new Map<string, string>() };
@@ -886,8 +909,18 @@ export function buildSvg(scene: RawExcalidrawScene, options: CliOptions): string
 
   const nodes = renderElementsHanddrawn(elements, transform, elementsById, imageClips);
 
-  const defsContent = [fillPatterns.defs, ...imageClips.defs].filter(Boolean).join("\n");
-  const defs = defsContent ? `<defs>\n${defsContent}\n</defs>\n` : "";
+  const defsParts: string[] = [];
+  if (fillPatterns.defs) {
+    defsParts.push(fillPatterns.defs);
+  }
+  defsParts.push(...imageClips.defs);
+  if (hasText) {
+    const virgilCss = getEmbeddedVirgilCss();
+    if (virgilCss) {
+      defsParts.push(`<style>${virgilCss}</style>`);
+    }
+  }
+  const defs = defsParts.length > 0 ? `<defs>\n${defsParts.join("\n")}\n</defs>\n` : "";
   const xlinkNamespace = hasImageElements ? ' xmlns:xlink="http://www.w3.org/1999/xlink"' : "";
 
   return `<?xml version="1.0" encoding="UTF-8"?>

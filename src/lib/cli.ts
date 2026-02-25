@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { CliUsageError, parseCliArgs, printUsage } from "./args";
+import { THIRD_PARTY_LICENSES_RELATIVE_PATH } from "./constants";
 import type { CliOptions, RawExcalidrawScene } from "./types";
 
 export function parseArgsOrExit(argv: string[], usage: string): CliOptions {
@@ -14,6 +15,23 @@ export function parseArgsOrExit(argv: string[], usage: string): CliOptions {
     }
     console.error(`Error: ${message}`);
     printUsage("stderr", usage);
+    process.exit(1);
+  }
+}
+
+export async function printLicensesOrExit(printLicenses: boolean): Promise<void> {
+  if (!printLicenses) {
+    return;
+  }
+
+  const licensesPath = path.resolve(import.meta.dir, THIRD_PARTY_LICENSES_RELATIVE_PATH);
+  try {
+    const content = await fs.readFile(licensesPath, "utf8");
+    console.log(content.trimEnd());
+    process.exit(0);
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : String(error);
+    console.error(`Error: failed to read third-party licenses: ${message}`);
     process.exit(1);
   }
 }

@@ -129,4 +129,5 @@ export type CliOptions = {
   out: string;
   padding: number;
   scale: number;
+  printLicenses: boolean;
 };

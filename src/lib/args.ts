@@ -10,6 +10,7 @@ export function parseCliArgs(argv: string[]): CliOptions {
     "--out": string;
     "--padding": number;
     "--scale": number;
+    "--print-licenses": boolean;
     "--help": boolean;
     "-h": "--help";
   }>;
@@ -21,6 +22,7 @@ export function parseCliArgs(argv: string[]): CliOptions {
         "--out": String,
         "--padding": Number,
         "--scale": Number,
+        "--print-licenses": Boolean,
         "--help": Boolean,
         "-h": "--help",
       },
@@ -42,16 +44,17 @@ export function parseCliArgs(argv: string[]): CliOptions {
     out: parsed["--out"] ?? "",
     padding: parsed["--padding"] ?? 24,
     scale: parsed["--scale"] ?? 1,
+    printLicenses: Boolean(parsed["--print-licenses"] ?? false),
   };
 
-  if (!args.in || !args.out) {
-    throw new CliUsageError("--in and --out are required");
-  }
   if (!Number.isFinite(args.padding) || args.padding < 0) {
     throw new CliUsageError("--padding must be a number >= 0");
   }
   if (!Number.isFinite(args.scale) || args.scale <= 0) {
     throw new CliUsageError("--scale must be a number > 0");
+  }
+  if (!args.printLicenses && (!args.in || !args.out)) {
+    throw new CliUsageError("--in and --out are required unless --print-licenses is used");
   }
 
   return args;
