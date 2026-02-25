@@ -1,14 +1,16 @@
 {
-  "name": "excalidraw-export",
-  "private": true,
+  "name": "excalidraw-to-image",
   "type": "module",
   "scripts": {
-    "excalidraw:svg": "bun run src/cli/excalidraw-to-svg.ts",
-    "excalidraw:png": "bun run src/cli/excalidraw-to-png.ts",
     "golden:generate": "bun run scripts/generate-golden.ts",
-    "test": "bun test"
+    "test": "bun test",
+    "excalidraw:cli": "bun run src/cli/excalidraw-to-image.ts"
   },
   "dependencies": {
     "@resvg/resvg-js": "^2.6.2"
+  },
+  "description": "Convert Excalidraw files to PNG/SVG.",
+  "bin": {
+    "excalidraw-to-image": "src/cli/excalidraw-to-image.ts"
   }
 }

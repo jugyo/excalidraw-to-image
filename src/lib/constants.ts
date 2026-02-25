@@ -23,10 +23,5 @@ export const FONT_FAMILY_MAP: Record<number, string> = {
 
 export const CLI_USAGE = [
   "Usage:",
-  "  bun run src/cli/excalidraw-to-svg.ts --in <input.json> --out <output.svg> [--padding 24] [--scale 1]",
-].join("\n");
-
-export const PNG_CLI_USAGE = [
-  "Usage:",
-  "  bun run src/cli/excalidraw-to-png.ts --in <input.json> --out <output.png> [--padding 24] [--scale 1]",
+  "  bun run src/cli/excalidraw-to-image.ts --in <input.json> --out <output.(png|svg)> [--padding 24] [--scale 1]",
 ].join("\n");
