@@ -1,0 +1,50 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "test-fixture",
+  "elements": [
+    {
+      "id": "img-bad-mime-1",
+      "type": "image",
+      "x": 340,
+      "y": 80,
+      "width": 180,
+      "height": 120,
+      "angle": 0,
+      "strokeColor": "#111827",
+      "backgroundColor": "transparent",
+      "strokeWidth": 1,
+      "opacity": 100,
+      "fileId": "file-txt-1",
+      "isDeleted": false
+    },
+    {
+      "id": "text-fallback-1",
+      "type": "text",
+      "x": 90,
+      "y": 120,
+      "width": 220,
+      "height": 32,
+      "angle": 0,
+      "strokeColor": "#111827",
+      "backgroundColor": "transparent",
+      "strokeWidth": 1,
+      "opacity": 100,
+      "text": "Unsupported MIME is skipped",
+      "fontSize": 18,
+      "fontFamily": 1,
+      "lineHeight": 1.2,
+      "isDeleted": false
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {
+    "file-txt-1": {
+      "id": "file-txt-1",
+      "mimeType": "text/plain",
+      "dataURL": "data:text/plain;base64,SGVsbG8="
+    }
+  }
+}

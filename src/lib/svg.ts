@@ -14,6 +14,10 @@ import type {
   CliOptions,
   CoordinateTransform,
   NormalizedElement,
+  NormalizedImageElement,
+  NormalizedLineLikeElement,
+  NormalizedShapeElement,
+  NormalizedTextElement,
   Point,
   RawExcalidrawScene,
 } from "./types";
@@ -30,6 +34,11 @@ function createTransform(bounds: Bounds, padding: number, scale: number): Coordi
 type FillPatternCatalog = {
   defs: string;
   ids: Map<string, string>;
+};
+
+type ImageClipCatalog = {
+  defs: string[];
+  nextId: number;
 };
 
 function patternKey(element: NormalizedElement): string {
@@ -256,7 +265,7 @@ function roundedPolygonPoints(points: Point[], radius: number, segmentsPerCorner
 }
 
 function renderRectangleClean(
-  element: NormalizedElement,
+  element: NormalizedShapeElement,
   transform: CoordinateTransform,
   patternIds: Map<string, string>,
 ): string {
@@ -276,7 +285,7 @@ function renderRectangleClean(
 }
 
 function renderEllipseClean(
-  element: NormalizedElement,
+  element: NormalizedShapeElement,
   transform: CoordinateTransform,
   patternIds: Map<string, string>,
 ): string {
@@ -289,7 +298,7 @@ function renderEllipseClean(
   return `<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" ${attrs}${rotate} />`;
 }
 
-function diamondPoints(element: NormalizedElement, transform: CoordinateTransform): Point[] {
+function diamondPoints(element: NormalizedShapeElement, transform: CoordinateTransform): Point[] {
   const x = element.x;
   const y = element.y;
   const w = element.width;
@@ -303,7 +312,7 @@ function diamondPoints(element: NormalizedElement, transform: CoordinateTransfor
 }
 
 function renderDiamondClean(
-  element: NormalizedElement,
+  element: NormalizedShapeElement,
   transform: CoordinateTransform,
   patternIds: Map<string, string>,
 ): string {
@@ -320,7 +329,7 @@ function renderDiamondClean(
 }
 
 function renderLineLikeClean(
-  element: NormalizedElement,
+  element: NormalizedLineLikeElement,
   transform: CoordinateTransform,
   withArrowHead: boolean,
 ): string {
@@ -361,7 +370,7 @@ function renderLineLikeClean(
   return `<polyline points="${pointsToSvg(points)}" ${attrs}${rounded} />`;
 }
 
-function renderText(element: NormalizedElement, transform: CoordinateTransform): string {
+function renderText(element: NormalizedTextElement, transform: CoordinateTransform): string {
   const fontFamily = FONT_FAMILY_MAP[element.fontFamily] ?? FONT_FAMILY_MAP[1];
   const fontSize = element.fontSize * transform.len(1);
   const lineHeight = element.lineHeight * fontSize;
@@ -382,11 +391,53 @@ function renderText(element: NormalizedElement, transform: CoordinateTransform):
   )}" font-size="${fontSize}" dominant-baseline="text-before-edge" ${attrs}${rotate}>${tspans}</text>`;
 }
 
+function buildImageClipPath(
+  element: NormalizedImageElement,
+  transform: CoordinateTransform,
+  clips: ImageClipCatalog,
+): string {
+  if (!element.crop) {
+    return "";
+  }
+
+  const clipX = transform.x(element.x + element.crop.x);
+  const clipY = transform.y(element.y + element.crop.y);
+  const clipWidth = transform.len(element.crop.width);
+  const clipHeight = transform.len(element.crop.height);
+  if (clipWidth <= 0 || clipHeight <= 0) {
+    return "";
+  }
+
+  const id = `image-clip-${clips.nextId}`;
+  clips.nextId += 1;
+  clips.defs.push(
+    `<clipPath id="${id}"><rect x="${clipX}" y="${clipY}" width="${clipWidth}" height="${clipHeight}" /></clipPath>`,
+  );
+  return ` clip-path="url(#${id})"`;
+}
+
+function renderImage(element: NormalizedImageElement, transform: CoordinateTransform, clips: ImageClipCatalog): string {
+  const rawX = Math.min(element.x, element.x + element.width);
+  const rawY = Math.min(element.y, element.y + element.height);
+  const rawWidth = Math.abs(element.width);
+  const rawHeight = Math.abs(element.height);
+  const x = transform.x(rawX);
+  const y = transform.y(rawY);
+  const width = transform.len(rawWidth);
+  const height = transform.len(rawHeight);
+  const opacity = normalizeOpacity(element.opacity);
+  const rotate = getRotationTransform(element, transform);
+  const clipPath = buildImageClipPath(element, transform, clips);
+  const href = escapeXml(element.dataURL);
+
+  return `<image x="${x}" y="${y}" width="${width}" height="${height}" opacity="${opacity}" preserveAspectRatio="none" href="${href}" xlink:href="${href}"${clipPath}${rotate} />`;
+}
+
 function positionedText(
-  element: NormalizedElement,
+  element: NormalizedTextElement,
   transform: CoordinateTransform,
   elementsById: Map<string, NormalizedElement>,
-): NormalizedElement {
+): NormalizedTextElement {
   if (!element.containerId) {
     return element;
   }
@@ -430,15 +481,16 @@ function renderHanddrawnStrokes(
   points: Point[],
   seed: string,
   closed: boolean,
+  scale: number,
   extraAttrs = "",
   options?: {
     roughness?: number;
     doubleStroke?: boolean;
   },
 ): string {
-  const strokeWidth = Math.max(0.5, element.strokeWidth);
+  const strokeWidth = Math.max(0.5, element.strokeWidth * scale);
   const opacity = normalizeOpacity(element.opacity);
-  const dash = strokeStyleAttrs(element, 1);
+  const dash = strokeStyleAttrs(element, scale);
   const stroke = escapeXml(element.strokeColor);
   const roughness = options?.roughness ?? 1;
   const enableDoubleStroke = options?.doubleStroke ?? strokeWidth < 3;
@@ -493,6 +545,7 @@ function renderHanddrawnPolygonShape(
   rotate: string,
   enableHatch: boolean,
   roughnessScale: number,
+  scale: number,
 ): string {
   const nodes: string[] = [];
   const fillColor = element.backgroundColor;
@@ -501,32 +554,32 @@ function renderHanddrawnPolygonShape(
   if (fillColor && fillColor !== "transparent") {
     nodes.push(`<path d="${polygonPath(points)}" fill="${escapeXml(fillColor)}" opacity="${opacity}" stroke="none" />`);
     if (enableHatch && element.fillStyle !== "solid") {
-      const hatchPath = buildPolygonHatchPath(points, element.strokeWidth, -35);
+      const hatchPath = buildPolygonHatchPath(points, element.strokeWidth * scale, -35);
       nodes.push(
         `<path d="${hatchPath}" fill="none" stroke="${escapeXml(
           fillColor,
-        )}" stroke-width="${Math.max(0.4, element.strokeWidth * 0.6)}" opacity="${opacity * 0.7}" />`,
+        )}" stroke-width="${Math.max(0.4, element.strokeWidth * scale * 0.6)}" opacity="${opacity * 0.7}" />`,
       );
       if (element.fillStyle === "cross-hatch") {
-        const hatchPath2 = buildPolygonHatchPath(points, element.strokeWidth, 55);
+        const hatchPath2 = buildPolygonHatchPath(points, element.strokeWidth * scale, 55);
         nodes.push(
           `<path d="${hatchPath2}" fill="none" stroke="${escapeXml(
             fillColor,
-          )}" stroke-width="${Math.max(0.4, element.strokeWidth * 0.6)}" opacity="${opacity * 0.7}" />`,
+          )}" stroke-width="${Math.max(0.4, element.strokeWidth * scale * 0.6)}" opacity="${opacity * 0.7}" />`,
         );
       }
     }
   }
 
   nodes.push(
-    renderHanddrawnStrokes(element, points, seed, true, 'stroke-linejoin="round"', {
+    renderHanddrawnStrokes(element, points, seed, true, scale, 'stroke-linejoin="round"', {
       roughness: 0.8 * roughnessScale,
     }),
   );
   return `<g${rotate}>\n${nodes.join("\n")}\n</g>`;
 }
 
-function rectPoints(element: NormalizedElement, transform: CoordinateTransform): Point[] {
+function rectPoints(element: NormalizedShapeElement, transform: CoordinateTransform): Point[] {
   const rawX = Math.min(element.x, element.x + element.width);
   const rawY = Math.min(element.y, element.y + element.height);
   const rawWidth = Math.abs(element.width);
@@ -546,17 +599,25 @@ function rectPoints(element: NormalizedElement, transform: CoordinateTransform):
 }
 
 function renderRectangleHanddrawn(
-  element: NormalizedElement,
+  element: NormalizedShapeElement,
   transform: CoordinateTransform,
   sloppinessScale: number,
 ): string {
   const points = rectPoints(element, transform);
   const rotate = getRotationTransform(element, transform);
-  return renderHanddrawnPolygonShape(element, points, `rect:${element.x}:${element.y}`, rotate, true, sloppinessScale);
+  return renderHanddrawnPolygonShape(
+    element,
+    points,
+    `rect:${element.x}:${element.y}`,
+    rotate,
+    true,
+    sloppinessScale,
+    transform.len(1),
+  );
 }
 
 function renderDiamondHanddrawn(
-  element: NormalizedElement,
+  element: NormalizedShapeElement,
   transform: CoordinateTransform,
   sloppinessScale: number,
 ): string {
@@ -572,11 +633,12 @@ function renderDiamondHanddrawn(
     rotate,
     true,
     sloppinessScale,
+    transform.len(1),
   );
 }
 
 function renderEllipseHanddrawn(
-  element: NormalizedElement,
+  element: NormalizedShapeElement,
   transform: CoordinateTransform,
   sloppinessScale: number,
 ): string {
@@ -593,6 +655,23 @@ function renderEllipseHanddrawn(
     nodes.push(
       `<path d="${polygonPath(points)}" fill="${escapeXml(element.backgroundColor)}" opacity="${opacity}" stroke="none" />`,
     );
+    if (element.fillStyle !== "solid") {
+      const hatchStroke = Math.max(0.4, element.strokeWidth * transform.len(1) * 0.6);
+      const hatchPath = buildPolygonHatchPath(points, element.strokeWidth * transform.len(1), -35);
+      nodes.push(
+        `<path d="${hatchPath}" fill="none" stroke="${escapeXml(
+          element.backgroundColor,
+        )}" stroke-width="${hatchStroke}" opacity="${opacity * 0.7}" />`,
+      );
+      if (element.fillStyle === "cross-hatch") {
+        const hatchPath2 = buildPolygonHatchPath(points, element.strokeWidth * transform.len(1), 55);
+        nodes.push(
+          `<path d="${hatchPath2}" fill="none" stroke="${escapeXml(
+            element.backgroundColor,
+          )}" stroke-width="${hatchStroke}" opacity="${opacity * 0.7}" />`,
+        );
+      }
+    }
   }
   nodes.push(
     renderHanddrawnStrokes(
@@ -600,6 +679,7 @@ function renderEllipseHanddrawn(
       points,
       `ellipse:${element.x}:${element.y}`,
       true,
+      transform.len(1),
       'stroke-linejoin="round"',
       {
         roughness: 0.9 * sloppinessScale,
@@ -610,7 +690,7 @@ function renderEllipseHanddrawn(
 }
 
 function renderLineLikeHanddrawn(
-  element: NormalizedElement,
+  element: NormalizedLineLikeElement,
   transform: CoordinateTransform,
   withArrowHead: boolean,
   sloppinessScale: number,
@@ -623,11 +703,12 @@ function renderLineLikeHanddrawn(
   const points = absolutePoints.map(([x, y]) => [transform.x(x), transform.y(y)] as Point);
   const canUseVariableFill =
     element.strokeStyle === "solid" && element.strokeWidth >= 1.8 && points.length >= 2;
+  const scaledStrokeWidth = Math.max(0.5, element.strokeWidth * transform.len(1));
 
   const renderVariableWidthFill = (seed: string, roughness: number): string => {
     const d = variableWidthStrokeFillPath(points, {
       seed,
-      strokeWidth: Math.max(0.5, element.strokeWidth),
+      strokeWidth: scaledStrokeWidth,
       roughness,
     });
     if (!d) {
@@ -640,7 +721,7 @@ function renderLineLikeHanddrawn(
     }
     const d2 = variableWidthStrokeFillPath(points, {
       seed: `${seed}:layer2`,
-      strokeWidth: Math.max(0.5, element.strokeWidth) * (roughness >= 1.4 ? 0.92 : 0.97),
+      strokeWidth: scaledStrokeWidth * (roughness >= 1.4 ? 0.92 : 0.97),
       roughness: roughness * 1.1,
     });
     if (!d2) {
@@ -663,6 +744,7 @@ function renderLineLikeHanddrawn(
       points,
       `line:${element.x}:${element.y}:${points.length}`,
       false,
+      transform.len(1),
       'stroke-linejoin="round" stroke-linecap="round"',
       {
         roughness,
@@ -693,14 +775,15 @@ function renderLineLikeHanddrawn(
           shaftPoints,
           shaftSeed,
           false,
+          transform.len(1),
           'stroke-linejoin="round" stroke-linecap="round"',
           { roughness: shaftRoughness, doubleStroke: false },
         );
   const head = arrowHead(tip, prev, headSize);
   const stroke = escapeXml(element.strokeColor);
   const opacity = normalizeOpacity(element.opacity);
-  const headStrokeWidth = Math.max(0.5, element.strokeWidth);
-  const headStrokeStyle = strokeStyleAttrs(element, 1);
+  const headStrokeWidth = Math.max(0.5, element.strokeWidth * transform.len(1));
+  const headStrokeStyle = strokeStyleAttrs(element, transform.len(1));
   const headStyle = headStrokeStyle ? ` ${headStrokeStyle}` : "";
   const headLine1 = `<path d="M ${head[0][0]} ${head[0][1]} L ${head[1][0]} ${head[1][1]}" fill="none" stroke="${stroke}" stroke-width="${headStrokeWidth}" opacity="${opacity}" stroke-linejoin="round" stroke-linecap="round"${headStyle} />`;
   const headLine2 = `<path d="M ${head[0][0]} ${head[0][1]} L ${head[2][0]} ${head[2][1]}" fill="none" stroke="${stroke}" stroke-width="${headStrokeWidth}" opacity="${opacity}" stroke-linejoin="round" stroke-linecap="round"${headStyle} />`;
@@ -712,6 +795,7 @@ function renderElementsClean(
   elements: NormalizedElement[],
   transform: CoordinateTransform,
   fillPatterns: FillPatternCatalog,
+  imageClips: ImageClipCatalog,
 ): string {
   return elements
     .map((element) => {
@@ -728,6 +812,8 @@ function renderElementsClean(
           return renderLineLikeClean(element, transform, true);
         case "text":
           return renderText(element, transform);
+        case "image":
+          return renderImage(element, transform, imageClips);
       }
     })
     .join("\n");
@@ -737,6 +823,7 @@ function renderElementsHanddrawn(
   elements: NormalizedElement[],
   transform: CoordinateTransform,
   elementsById: Map<string, NormalizedElement>,
+  imageClips: ImageClipCatalog,
 ): string {
   const strokeGainByRoughness = (roughness: number): number => {
     if (roughness <= 1) {
@@ -778,14 +865,18 @@ function renderElementsHanddrawn(
           return renderLineLikeHanddrawn(effectiveElement, transform, true, sloppinessScale);
         case "text":
           return renderText(positionedText(effectiveElement, transform, elementsById), transform);
+        case "image":
+          return renderImage(effectiveElement, transform, imageClips);
       }
     })
     .join("\n");
 }
 
 export function buildSvg(scene: RawExcalidrawScene, options: CliOptions): string {
-  const elements = normalizeElements(scene.elements ?? []);
+  const elements = normalizeElements(scene.elements ?? [], scene.files ?? {});
   const elementsById = new Map(elements.map((element) => [element.id, element]));
+  const hasImageElements = elements.some((element) => element.type === "image");
+  const imageClips: ImageClipCatalog = { defs: [], nextId: 1 };
   const fillPatterns = { defs: "", ids: new Map<string, string>() };
   const bounds = computeSceneBounds(elements);
   const transform = createTransform(bounds, options.padding, options.scale);
@@ -793,12 +884,14 @@ export function buildSvg(scene: RawExcalidrawScene, options: CliOptions): string
   const height = Math.max(1, (bounds.maxY - bounds.minY + options.padding * 2) * options.scale);
   const background = scene.appState?.viewBackgroundColor || "transparent";
 
-  const nodes = renderElementsHanddrawn(elements, transform, elementsById);
+  const nodes = renderElementsHanddrawn(elements, transform, elementsById, imageClips);
 
-  const defs = fillPatterns.defs ? `<defs>\n${fillPatterns.defs}\n</defs>\n` : "";
+  const defsContent = [fillPatterns.defs, ...imageClips.defs].filter(Boolean).join("\n");
+  const defs = defsContent ? `<defs>\n${defsContent}\n</defs>\n` : "";
+  const xlinkNamespace = hasImageElements ? ' xmlns:xlink="http://www.w3.org/1999/xlink"' : "";
 
   return `<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
+<svg xmlns="http://www.w3.org/2000/svg"${xlinkNamespace} version="1.1" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
 <rect x="0" y="0" width="${width}" height="${height}" fill="${escapeXml(background)}" />
 ${defs}
 ${nodes}

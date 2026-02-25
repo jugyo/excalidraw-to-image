@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="308" height="208" viewBox="0 0 308 208">
+<rect x="0" y="0" width="308" height="208" fill="#ffffff" />
+<defs>
+<clipPath id="image-clip-1"><rect x="64" y="44" width="140" height="90" /></clipPath>
+</defs>
+
+<image x="24" y="24" width="260" height="160" opacity="1" preserveAspectRatio="none" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMTIwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjEyMCIgZmlsbD0iI2M0YjVmZCIvPjxyZWN0IHg9IjIwIiB5PSIxMCIgd2lkdGg9IjE2MCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiNmYjcxODEiLz48L3N2Zz4=" xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMTIwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjEyMCIgZmlsbD0iI2M0YjVmZCIvPjxyZWN0IHg9IjIwIiB5PSIxMCIgd2lkdGg9IjE2MCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiNmYjcxODEiLz48L3N2Zz4=" clip-path="url(#image-clip-1)" />
+</svg>

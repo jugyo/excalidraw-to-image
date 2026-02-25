@@ -1,7 +1,7 @@
-import type { Bounds, NormalizedElement } from "./types";
+import type { Bounds, NormalizedElement, NormalizedLineLikeElement } from "./types";
 import { pointToAbs } from "./utils";
 
-function computeLineBounds(element: NormalizedElement): Bounds {
+function computeLineBounds(element: NormalizedLineLikeElement): Bounds {
   const points = element.points;
   if (!points.length) {
     return {

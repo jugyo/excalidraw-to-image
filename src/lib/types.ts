@@ -4,7 +4,8 @@ export type SupportedElementType =
   | "diamond"
   | "line"
   | "arrow"
-  | "text";
+  | "text"
+  | "image";
 
 export type Point = [number, number];
 
@@ -32,7 +33,16 @@ export type RawExcalidrawElement = {
   containerId?: string;
   textAlign?: "left" | "center" | "right";
   verticalAlign?: "top" | "middle" | "bottom";
+  fileId?: string;
+  crop?: unknown;
+  scale?: unknown;
   isDeleted?: boolean;
+};
+
+export type RawSceneFile = {
+  id?: string;
+  mimeType?: string;
+  dataURL?: string;
 };
 
 export type RawExcalidrawScene = {
@@ -40,11 +50,11 @@ export type RawExcalidrawScene = {
   appState?: {
     viewBackgroundColor?: string;
   };
+  files?: Record<string, RawSceneFile>;
 };
 
-export type NormalizedElement = {
+export type NormalizedCommonElement = {
   id: string;
-  type: SupportedElementType;
   x: number;
   y: number;
   width: number;
@@ -58,7 +68,19 @@ export type NormalizedElement = {
   roughness: number;
   opacity: number;
   roundness: number;
+};
+
+export type NormalizedShapeElement = NormalizedCommonElement & {
+  type: "rectangle" | "ellipse" | "diamond";
+};
+
+export type NormalizedLineLikeElement = NormalizedCommonElement & {
+  type: "line" | "arrow";
   points: Point[];
+};
+
+export type NormalizedTextElement = NormalizedCommonElement & {
+  type: "text";
   text: string;
   fontSize: number;
   fontFamily: number;
@@ -67,6 +89,27 @@ export type NormalizedElement = {
   textAlign: "left" | "center" | "right";
   verticalAlign: "top" | "middle" | "bottom";
 };
+
+export type NormalizedImageCrop = {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+};
+
+export type NormalizedImageElement = NormalizedCommonElement & {
+  type: "image";
+  fileId: string;
+  dataURL: string;
+  mimeType: string;
+  crop?: NormalizedImageCrop;
+};
+
+export type NormalizedElement =
+  | NormalizedShapeElement
+  | NormalizedLineLikeElement
+  | NormalizedTextElement
+  | NormalizedImageElement;
 
 export type Bounds = {
   minX: number;

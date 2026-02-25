@@ -1,0 +1,38 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "test-fixture",
+  "elements": [
+    {
+      "id": "img-crop-1",
+      "type": "image",
+      "x": 120,
+      "y": 100,
+      "width": 260,
+      "height": 160,
+      "angle": 0,
+      "strokeColor": "#111827",
+      "backgroundColor": "transparent",
+      "strokeWidth": 1,
+      "opacity": 100,
+      "fileId": "file-svg-crop",
+      "crop": {
+        "x": 40,
+        "y": 20,
+        "width": 140,
+        "height": 90
+      },
+      "isDeleted": false
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {
+    "file-svg-crop": {
+      "id": "file-svg-crop",
+      "mimeType": "image/svg+xml",
+      "dataURL": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMTIwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjEyMCIgZmlsbD0iI2M0YjVmZCIvPjxyZWN0IHg9IjIwIiB5PSIxMCIgd2lkdGg9IjE2MCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiNmYjcxODEiLz48L3N2Zz4="
+    }
+  }
+}
