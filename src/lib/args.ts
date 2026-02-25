@@ -1,39 +1,48 @@
+import arg from "arg";
 import { CLI_USAGE } from "./constants";
 import type { CliOptions } from "./types";
 
 export class CliUsageError extends Error {}
 
 export function parseCliArgs(argv: string[]): CliOptions {
-  const args: CliOptions = {
-    in: "",
-    out: "",
-    padding: 24,
-    scale: 1,
-  };
+  let parsed: arg.Result<{
+    "--in": string;
+    "--out": string;
+    "--padding": number;
+    "--scale": number;
+    "--help": boolean;
+    "-h": "--help";
+  }>;
 
-  for (let i = 2; i < argv.length; i += 1) {
-    const token = argv[i];
-    if (token === "--in") {
-      args.in = argv[++i] ?? "";
-      continue;
-    }
-    if (token === "--out") {
-      args.out = argv[++i] ?? "";
-      continue;
-    }
-    if (token === "--padding") {
-      args.padding = Number(argv[++i]);
-      continue;
-    }
-    if (token === "--scale") {
-      args.scale = Number(argv[++i]);
-      continue;
-    }
-    if (token === "--help" || token === "-h") {
-      throw new CliUsageError("");
-    }
-    throw new CliUsageError(`Unknown argument: ${token}`);
+  try {
+    parsed = arg(
+      {
+        "--in": String,
+        "--out": String,
+        "--padding": Number,
+        "--scale": Number,
+        "--help": Boolean,
+        "-h": "--help",
+      },
+      {
+        argv: argv.slice(2),
+      },
+    );
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : String(error);
+    throw new CliUsageError(message);
   }
+
+  if (parsed["--help"]) {
+    throw new CliUsageError("");
+  }
+
+  const args: CliOptions = {
+    in: parsed["--in"] ?? "",
+    out: parsed["--out"] ?? "",
+    padding: parsed["--padding"] ?? 24,
+    scale: parsed["--scale"] ?? 1,
+  };
 
   if (!args.in || !args.out) {
     throw new CliUsageError("--in and --out are required");
