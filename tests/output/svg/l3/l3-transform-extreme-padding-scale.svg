@@ -2,7 +2,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="268" height="236" viewBox="0 0 268 236">
 <rect x="0" y="0" width="268" height="236" fill="#ffffff" />
 
-<rect x="24" y="24" width="120" height="80" stroke="#111827" fill="#fde68a" stroke-width="4" opacity="1" />
-<polyline points="34,144 194,144" stroke="#1d4ed8" fill="none" stroke-width="6" opacity="1"  />
-<text x="24" y="184" font-family="Noto Sans JP, sans-serif" font-size="18" dominant-baseline="hanging" fill="#1e3a8a" opacity="1"><tspan x="24" dy="0">Run with high --padding/--scale</tspan></text>
+<g>
+<path d="M 24 24 L 144 24 L 144 104 L 24 104 Z" fill="#fde68a" opacity="1" stroke="none" />
+<path d="M 24 24.28807150606139 L 41.14285714285714 23.949919037385357 L 58.285714285714285 23.847314094993443 L 75.42857142857142 23.854208476851326 L 92.57142857142857 23.538551423388533 L 109.71428571428572 23.621368916328823 L 126.85714285714285 23.971255955730335 L 144 23.852661187222775 L 143.806154663818 40 L 143.9639633467394 56 L 144.2277778342948 72 L 144.01374745235097 88 L 144.41417397542537 104 L 126.85714285714286 103.54314990792919 L 109.71428571428572 104.28913873607702 L 92.57142857142858 103.91640640242369 L 75.42857142857143 103.76142760489921 L 58.28571428571428 103.6093834579849 L 41.14285714285715 104.10236029824127 L 24 103.82628121130514 L 24.393874743416905 88 L 24.35154972937396 72 L 23.833459448374104 56 L 24.229034432718528 40 L 23.554374685384268 24 Z" fill="none" stroke="#111827" stroke-width="4" opacity="1" stroke-linejoin="round" />
+</g>
+<path d="M 34 144 L 54 143.91590121224857 L 74 143.8995616955217 L 94 144.14939905184613 L 114 144.04362439796353 L 134 144.23914503619702 L 154 144.04203396450782 L 174 143.94283074542744 L 194 144" fill="none" stroke="#1d4ed8" stroke-width="6" opacity="1" stroke-linejoin="round" stroke-linecap="round" />
+<text x="24" y="184" font-family="Noto Sans JP, sans-serif" font-size="18" dominant-baseline="text-before-edge" fill="#1e3a8a" opacity="1"><tspan x="24" dy="0">Run with high --padding/--scale</tspan></text>
 </svg>

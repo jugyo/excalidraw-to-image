@@ -8,8 +8,8 @@ import type { CliOptions, RawExcalidrawScene } from "../src/lib/types";
 
 type ScriptOptions = {
   fixturesDir: string;
-  svgOutDir: string;
-  pngOutDir: string;
+  svgOutDir?: string;
+  pngOutDir?: string;
   padding: number;
   scale: number;
   level?: string;
@@ -62,8 +62,8 @@ function parseArgs(argv: string[]): ScriptOptions {
     throw new Error(`Unknown argument: ${token}`);
   }
 
-  if (!options.fixturesDir || !options.svgOutDir || !options.pngOutDir) {
-    throw new Error("--fixtures-dir, --svg-out-dir, and --png-out-dir are required");
+  if (!options.fixturesDir) {
+    throw new Error("--fixtures-dir is required");
   }
   if (!Number.isFinite(options.padding) || options.padding < 0) {
     throw new Error("--padding must be a number >= 0");
@@ -129,8 +129,8 @@ async function main(): Promise<void> {
   }
 
   const fixturesRoot = path.resolve(options.fixturesDir);
-  const svgOutputRoot = path.resolve(options.svgOutDir);
-  const pngOutputRoot = path.resolve(options.pngOutDir);
+  const svgOutputRoot = path.resolve(options.svgOutDir ?? "tests/output/svg");
+  const pngOutputRoot = path.resolve(options.pngOutDir ?? "tests/output/png");
   const targetRoot = options.level ? path.join(fixturesRoot, options.level) : fixturesRoot;
 
   const fixtures = (await collectJsonFiles(targetRoot)).sort();

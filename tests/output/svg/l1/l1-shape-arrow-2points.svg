@@ -2,6 +2,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="328" height="178" viewBox="0 0 328 178">
 <rect x="0" y="0" width="328" height="178" fill="#ffffff" />
 
-<polyline points="24,24 294.20430314831697,149.45199789029002" stroke="#1d4ed8" fill="none" stroke-width="3" opacity="1"  />
-<polygon points="304,154 290.3365577644183,154.9329235096841 295.8952270096194,142.9604051354048" fill="#1d4ed8" opacity="1" />
+<path d="M 24 24 L 59.01154061989777 40.22514328022019 L 93.97433055315864 56.55528803935062 L 129.05009192923666 72.64210969087488 L 164.0048534723127 88.9895463673265 L 199.01938548649238 105.20824664447795 L 234.02089852328507 121.45498779600138 L 268.9852306953152 137.78181081009035 L 304 154" fill="none" stroke="#1d4ed8" stroke-width="3" opacity="1" stroke-linejoin="round" stroke-linecap="round" />
+<path d="M 304 154 L 290.3365577644183 154.9329235096841" fill="none" stroke="#1d4ed8" stroke-width="3" opacity="1" stroke-linejoin="round" stroke-linecap="round" />
+<path d="M 304 154 L 295.8952270096194 142.9604051354048" fill="none" stroke="#1d4ed8" stroke-width="3" opacity="1" stroke-linejoin="round" stroke-linecap="round" />
 </svg>

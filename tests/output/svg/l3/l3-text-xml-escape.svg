@@ -2,5 +2,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="608" height="138" viewBox="0 0 608 138">
 <rect x="0" y="0" width="608" height="138" fill="#ffffff" />
 
-<text x="24" y="24" font-family="Noto Sans JP, sans-serif" font-size="28" dominant-baseline="hanging" fill="#111827" opacity="1"><tspan x="24" dy="0">escape: &amp; &lt; &gt; &quot; &apos; and tag-like &lt;node attr=&quot;v&quot;&gt;</tspan></text>
+<text x="24" y="24" font-family="Noto Sans JP, sans-serif" font-size="28" dominant-baseline="text-before-edge" fill="#111827" opacity="1"><tspan x="24" dy="0">escape: &amp; &lt; &gt; &quot; &apos; and tag-like &lt;node attr=&quot;v&quot;&gt;</tspan></text>
 </svg>

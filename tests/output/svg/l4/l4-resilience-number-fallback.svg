@@ -2,7 +2,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="548" height="348" viewBox="0 0 548 348">
 <rect x="0" y="0" width="548" height="348" fill="#ffffff" />
 
-<rect x="24" y="24" width="0" height="0" stroke="#1f2937" fill="#dbeafe" stroke-width="1" opacity="1" />
-<polyline points="24,24 24,144" stroke="#1d4ed8" fill="none" stroke-width="1" opacity="1"  />
-<text x="104" y="284" font-family="Noto Sans JP, sans-serif" font-size="20" dominant-baseline="hanging" fill="#111827" opacity="1"><tspan x="104" dy="0">number coercion fallback case</tspan></text>
+<g>
+<path d="M 24 24 L 24 24 L 24 24 L 24 24 Z" fill="#dbeafe" opacity="1" stroke="none" />
+<path d="" fill="none" stroke="#1f2937" stroke-width="1" opacity="1" stroke-linejoin="round" />
+<path d="" fill="none" stroke="#1f2937" stroke-width="0.9" opacity="0.7" stroke-linejoin="round" />
+</g>
+<path d="M 24 24 L 23.792817396400498 41.14285714285714 L 24.278677836405112 58.285714285714285 L 23.708862969372422 75.42857142857142 L 23.51619799381122 92.57142857142857 L 24.520212568351997 109.71428571428572 L 24.018806608160958 126.85714285714285 L 24 144" fill="none" stroke="#1d4ed8" stroke-width="1" opacity="1" stroke-linejoin="round" stroke-linecap="round" />
+<path d="M 24 24 L 23.76785194019554 41.14285714285714 L 24.084289835128 58.285714285714285 L 23.553342774570453 75.42857142857142 L 23.95806495554326 92.57142857142857 L 23.91149892866146 109.71428571428572 L 23.896642617608887 126.85714285714285 L 24 144" fill="none" stroke="#1d4ed8" stroke-width="0.9" opacity="0.7" stroke-linejoin="round" stroke-linecap="round" />
+<text x="104" y="284" font-family="Noto Sans JP, sans-serif" font-size="20" dominant-baseline="text-before-edge" fill="#111827" opacity="1"><tspan x="104" dy="0">number coercion fallback case</tspan></text>
 </svg>

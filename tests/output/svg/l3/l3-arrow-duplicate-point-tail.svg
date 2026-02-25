@@ -2,7 +2,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="478" height="226" viewBox="0 0 478 226">
 <rect x="0" y="0" width="478" height="226" fill="#ffffff" />
 
-<polyline points="24,24 244,104 344,144 333.9724517384392,139.9889806953757" stroke="#b45309" fill="none" stroke-width="3" opacity="1"  />
-<polygon points="344,144 330.40710124543983,145.67125804359347 335.309458173314,133.41536572390805" fill="#b45309" opacity="1" />
-<text x="24" y="174" font-family="Noto Sans JP, sans-serif" font-size="18" dominant-baseline="hanging" fill="#111827" opacity="1"><tspan x="24" dy="0">arrow with duplicated last point</tspan></text>
+<path d="M 24 24 L 51.49661661730665 34.00930430240671 L 79.00782337585964 43.978485716386 L 106.5126104424025 53.965321283393116 L 133.9937969528152 64.01705837975824 L 161.48788321080573 74.03332117028425 L 189.03577217969746 83.901626505832 L 216.5250360054877 93.93115098490883 L 244.00412146316248 103.98866597630317 L 260.60271993330946 110.82653350005981 L 277.2895803505453 117.44271579030338 L 294.004036516894 123.98990870776497 L 310.73495547754123 130.49594463948017 L 327.2739092640276 137.48189350659774 L 343.9459142653922 144.13521433651945" fill="none" stroke="#b45309" stroke-width="3" opacity="1" stroke-linejoin="round" stroke-linecap="round" />
+<path d="M 344 144 L 330.40710124543983 145.67125804359347" fill="none" stroke="#b45309" stroke-width="3" opacity="1" stroke-linejoin="round" stroke-linecap="round" />
+<path d="M 344 144 L 335.309458173314 133.41536572390805" fill="none" stroke="#b45309" stroke-width="3" opacity="1" stroke-linejoin="round" stroke-linecap="round" />
+<text x="24" y="174" font-family="Noto Sans JP, sans-serif" font-size="18" dominant-baseline="text-before-edge" fill="#111827" opacity="1"><tspan x="24" dy="0">arrow with duplicated last point</tspan></text>
 </svg>

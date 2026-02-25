@@ -21,6 +21,7 @@ export type RawExcalidrawElement = {
   fillStyle?: string;
   strokeWidth?: number;
   strokeStyle?: string;
+  roughness?: number;
   opacity?: number;
   roundness?: unknown;
   points?: unknown;
@@ -28,6 +29,9 @@ export type RawExcalidrawElement = {
   fontSize?: number;
   fontFamily?: number;
   lineHeight?: number;
+  containerId?: string;
+  textAlign?: "left" | "center" | "right";
+  verticalAlign?: "top" | "middle" | "bottom";
   isDeleted?: boolean;
 };
 
@@ -39,6 +43,7 @@ export type RawExcalidrawScene = {
 };
 
 export type NormalizedElement = {
+  id: string;
   type: SupportedElementType;
   x: number;
   y: number;
@@ -50,6 +55,7 @@ export type NormalizedElement = {
   fillStyle: "solid" | "hachure" | "cross-hatch";
   strokeWidth: number;
   strokeStyle: "solid" | "dashed" | "dotted";
+  roughness: number;
   opacity: number;
   roundness: number;
   points: Point[];
@@ -57,6 +63,9 @@ export type NormalizedElement = {
   fontSize: number;
   fontFamily: number;
   lineHeight: number;
+  containerId?: string;
+  textAlign: "left" | "center" | "right";
+  verticalAlign: "top" | "middle" | "bottom";
 };
 
 export type Bounds = {

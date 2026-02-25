@@ -1,0 +1,59 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "test-fixture",
+  "elements": [
+    {
+      "id": "arrow-solid",
+      "type": "arrow",
+      "x": 70,
+      "y": 90,
+      "width": 240,
+      "height": 0,
+      "angle": 0,
+      "strokeColor": "#0f766e",
+      "backgroundColor": "transparent",
+      "strokeWidth": 3,
+      "strokeStyle": "solid",
+      "opacity": 100,
+      "points": [[0, 0], [240, 0]],
+      "isDeleted": false
+    },
+    {
+      "id": "arrow-dashed",
+      "type": "arrow",
+      "x": 70,
+      "y": 160,
+      "width": 240,
+      "height": 0,
+      "angle": 0,
+      "strokeColor": "#0f766e",
+      "backgroundColor": "transparent",
+      "strokeWidth": 3,
+      "strokeStyle": "dashed",
+      "opacity": 100,
+      "points": [[0, 0], [240, 0]],
+      "isDeleted": false
+    },
+    {
+      "id": "arrow-dotted",
+      "type": "arrow",
+      "x": 70,
+      "y": 230,
+      "width": 240,
+      "height": 0,
+      "angle": 0,
+      "strokeColor": "#0f766e",
+      "backgroundColor": "transparent",
+      "strokeWidth": 3,
+      "strokeStyle": "dotted",
+      "opacity": 100,
+      "points": [[0, 0], [240, 0]],
+      "isDeleted": false
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}

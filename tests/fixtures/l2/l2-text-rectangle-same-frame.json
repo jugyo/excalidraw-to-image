@@ -1,0 +1,45 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "test-fixture",
+  "elements": [
+    {
+      "id": "rect-same-frame",
+      "type": "rectangle",
+      "x": 120,
+      "y": 100,
+      "width": 300,
+      "height": 140,
+      "angle": 0,
+      "strokeColor": "#1f2937",
+      "backgroundColor": "#dbeafe",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "fillStyle": "solid",
+      "opacity": 100,
+      "isDeleted": false
+    },
+    {
+      "id": "text-same-frame",
+      "type": "text",
+      "x": 120,
+      "y": 100,
+      "width": 300,
+      "height": 140,
+      "angle": 0,
+      "strokeColor": "#111827",
+      "backgroundColor": "transparent",
+      "strokeWidth": 1,
+      "opacity": 100,
+      "text": "Text and Rectangle\nshare same frame",
+      "fontSize": 28,
+      "fontFamily": 1,
+      "lineHeight": 1.2,
+      "isDeleted": false
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#f9fafb"
+  },
+  "files": {}
+}

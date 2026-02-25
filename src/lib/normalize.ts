@@ -33,11 +33,15 @@ function toNormalizedElement(element: RawExcalidrawElement): NormalizedElement {
     if (Number.isFinite(candidate.value)) {
       roundness = Math.max(0, ensureNumber(candidate.value, 0));
     } else if (ensureNumber(candidate.type, 0) > 0) {
-      roundness = 12;
+      const w = Math.abs(ensureNumber(element.width, 0));
+      const h = Math.abs(ensureNumber(element.height, 0));
+      const adaptive = Math.min(w, h) * 0.2;
+      roundness = Math.max(6, Math.min(32, adaptive));
     }
   }
 
   return {
+    id: element.id || "",
     type: element.type as NormalizedElement["type"],
     x: ensureNumber(element.x, 0),
     y: ensureNumber(element.y, 0),
@@ -49,6 +53,7 @@ function toNormalizedElement(element: RawExcalidrawElement): NormalizedElement {
     fillStyle,
     strokeWidth: ensureNumber(element.strokeWidth, 1),
     strokeStyle,
+    roughness: ensureNumber(element.roughness, 1),
     opacity: ensureNumber(element.opacity, 100),
     roundness,
     points: normalizePoints(element.points),
@@ -56,6 +61,15 @@ function toNormalizedElement(element: RawExcalidrawElement): NormalizedElement {
     fontSize: ensureNumber(element.fontSize, 20),
     fontFamily: ensureNumber(element.fontFamily, 1),
     lineHeight: ensureNumber(element.lineHeight, 1.2),
+    containerId: element.containerId,
+    textAlign:
+      element.textAlign === "left" || element.textAlign === "right" || element.textAlign === "center"
+        ? element.textAlign
+        : "left",
+    verticalAlign:
+      element.verticalAlign === "top" || element.verticalAlign === "bottom" || element.verticalAlign === "middle"
+        ? element.verticalAlign
+        : "top",
   };
 }
 
