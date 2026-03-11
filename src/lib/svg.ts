@@ -574,20 +574,24 @@ function renderHanddrawnPolygonShape(
   const opacity = normalizeOpacity(element.opacity);
 
   if (fillColor && fillColor !== "transparent") {
-    nodes.push(`<path d="${polygonPath(points)}" fill="${escapeXml(fillColor)}" opacity="${opacity}" stroke="none" />`);
+    if (element.fillStyle === "solid" || !enableHatch) {
+      nodes.push(
+        `<path d="${polygonPath(points)}" fill="${escapeXml(fillColor)}" opacity="${opacity}" stroke="none" />`,
+      );
+    }
     if (enableHatch && element.fillStyle !== "solid") {
       const hatchPath = buildPolygonHatchPath(points, element.strokeWidth * scale, -35);
       nodes.push(
         `<path d="${hatchPath}" fill="none" stroke="${escapeXml(
           fillColor,
-        )}" stroke-width="${Math.max(0.4, element.strokeWidth * scale * 0.6)}" opacity="${opacity * 0.7}" />`,
+        )}" stroke-width="${Math.max(0.4, element.strokeWidth * scale * 0.6)}" opacity="${opacity}" />`,
       );
       if (element.fillStyle === "cross-hatch") {
         const hatchPath2 = buildPolygonHatchPath(points, element.strokeWidth * scale, 55);
         nodes.push(
           `<path d="${hatchPath2}" fill="none" stroke="${escapeXml(
             fillColor,
-          )}" stroke-width="${Math.max(0.4, element.strokeWidth * scale * 0.6)}" opacity="${opacity * 0.7}" />`,
+          )}" stroke-width="${Math.max(0.4, element.strokeWidth * scale * 0.6)}" opacity="${opacity}" />`,
         );
       }
     }
@@ -674,23 +678,25 @@ function renderEllipseHanddrawn(
   const opacity = normalizeOpacity(element.opacity);
 
   if (element.backgroundColor && element.backgroundColor !== "transparent") {
-    nodes.push(
-      `<path d="${polygonPath(points)}" fill="${escapeXml(element.backgroundColor)}" opacity="${opacity}" stroke="none" />`,
-    );
+    if (element.fillStyle === "solid") {
+      nodes.push(
+        `<path d="${polygonPath(points)}" fill="${escapeXml(element.backgroundColor)}" opacity="${opacity}" stroke="none" />`,
+      );
+    }
     if (element.fillStyle !== "solid") {
       const hatchStroke = Math.max(0.4, element.strokeWidth * transform.len(1) * 0.6);
       const hatchPath = buildPolygonHatchPath(points, element.strokeWidth * transform.len(1), -35);
       nodes.push(
         `<path d="${hatchPath}" fill="none" stroke="${escapeXml(
           element.backgroundColor,
-        )}" stroke-width="${hatchStroke}" opacity="${opacity * 0.7}" />`,
+        )}" stroke-width="${hatchStroke}" opacity="${opacity}" />`,
       );
       if (element.fillStyle === "cross-hatch") {
         const hatchPath2 = buildPolygonHatchPath(points, element.strokeWidth * transform.len(1), 55);
         nodes.push(
           `<path d="${hatchPath2}" fill="none" stroke="${escapeXml(
             element.backgroundColor,
-          )}" stroke-width="${hatchStroke}" opacity="${opacity * 0.7}" />`,
+          )}" stroke-width="${hatchStroke}" opacity="${opacity}" />`,
         );
       }
     }
